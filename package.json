@@ -1,0 +1,53 @@
+{
+  "name": "markdown-it-prism",
+  "version": "1.0.0",
+  "description": "Highlights code blocks in markdown-it using Prism.",
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin",
+    "highlight",
+    "prism",
+    "prismjs"
+  ],
+  "homepage": "https://github.com/jGleitz/markdown-it-prism",
+  "license": "GPL-3.0",
+  "author": {
+    "name": "Joshua Gleitze",
+    "url": "https://joshuagleitze.de"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "build/index.js"
+  ],
+  "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jGleitz/markdown-it-prism.git"
+  },
+  "scripts": {
+    "build": "babel *.js -d build",
+    "lint": "eslint *.js",
+    "prepublish": "npm run build",
+    "pretest": " npm run build",
+    "unittest": "mocha build/test.js",
+    "test": "npm run lint && npm run unittest"
+  },
+  "dependencies": {
+    "prismjs": "^1.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
+    "chai": "*",
+    "chai-string": "^1.2.0",
+    "eslint": "^3.8.0",
+    "markdown-it": "^8.0.0",
+    "mocha": "*"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  }
+}
