@@ -1,4 +1,4 @@
-# markdown-it-prism
+# markdown-it-prism [![Build Status](https://travis-ci.org/jGleitz/markdown-it-prism.svg?branch=master)](https://travis-ci.org/jGleitz/markdown-it-prism) [![dependencies Status](https://david-dm.org/jGleitz/markdown-it-prism/status.svg)](https://david-dm.org/jGleitz/markdown-it-prism)
 > [markdown-it](https://github.com/markdown-it/markdown-it) plugin to highlight code blocks using [Prism](http://prismjs.com/)
 
 ## Usage
