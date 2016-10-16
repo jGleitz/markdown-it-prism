@@ -40,7 +40,7 @@ describe('markdown-it-prism', () => {
 			})).to.throw(Error, /plugin/);
 	});
 
-	it('offers an init function for further initilisation', () => {
+	it('offers an init function for further initialisation', () => {
 		let called = false;
 		markdownit()
 			.use(markdownItPrism, {
