@@ -1,0 +1,27 @@
+{
+  "name": "markdown-it-kbd",
+  "description": "Highlights code blocks in markdown-it using Prism.",
+  "main": "build/index.js",
+  "authors": [
+    {
+      "name": "Joshua Gleitze",
+      "homepage": "https://joshuagleitze.de"
+    }
+  ],
+  "license": "GPL-3.0",
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin",
+    "highlight",
+    "prism",
+    "prismjs"
+  ],
+  "homepage": "https://github.com/jGleitz/markdown-it-prism",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
