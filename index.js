@@ -1,8 +1,9 @@
 import Prism from 'prismjs';
+var md = require('markdown-it')();
 
 const DEFAULTS = {
 	plugins: [],
-	init: () => {}
+	init: () => { }
 };
 
 
@@ -29,7 +30,7 @@ function loadPrismLang(lang) {
 function loadPrismPlugin(name) {
 	try {
 		require(`prismjs/plugins/${name}/prism-${name}`);
-	} catch(e) {
+	} catch (e) {
 		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`);
 	}
 }
@@ -46,7 +47,9 @@ function loadPrismPlugin(name) {
 function highlight(text, lang) {
 	const prismLang = loadPrismLang(lang);
 	if (prismLang) {
-		return Prism.highlight(text, prismLang);
+		return '<pre class="language-' + lang + '"><code class="language-' + lang + '">\n\t' + Prism.highlight(text, prismLang) + '</code></pre>';
+	} else {
+		return '<pre class="language-unknown"><code class="language-unknown">\n\t' + md.utils.escapeHtml(text) + '</code></pre>';
 	}
 }
 
