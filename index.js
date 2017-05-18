@@ -1,5 +1,5 @@
 import Prism from 'prismjs';
-var md = require('markdown-it')();
+const md = require('markdown-it')();
 
 const DEFAULTS = {
 	plugins: [],
@@ -47,9 +47,9 @@ function loadPrismPlugin(name) {
 function highlight(text, lang) {
 	const prismLang = loadPrismLang(lang);
 	if (prismLang) {
-		return '<pre class="language-' + lang + '"><code class="language-' + lang + '">\n\t' + Prism.highlight(text, prismLang) + '</code></pre>';
+		return `<pre class="language-${lang}"><code class="language-${lang}">\n\t${Prism.highlight(text, prismLang)}</code></pre>`;
 	} else {
-		return '<pre class="language-unknown"><code class="language-unknown">\n\t' + md.utils.escapeHtml(text) + '</code></pre>';
+		return `<pre class="language-unknown"><code class="language-unknown">\n\t${md.utils.escapeHtml(text)}</code></pre>`;
 	}
 }
 
