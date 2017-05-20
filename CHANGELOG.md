@@ -14,6 +14,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
-[unreleased]: https://github.com/valeriangalliat/markdown-it-prism/compare/v1.1.0...HEAD
-[1.1.0]: https://github.com/valeriangalliat/markdown-it-prism/compare/v1.0.1...v1.1.0
-[1.0.1]: https://github.com/valeriangalliat/markdown-it-prism/compare/v1.0.0...v1.0.1
+[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/jGleitz/markdown-it-prism/compare/v1.0.1...v1.1.0
+[1.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v1.0.0...v1.0.1
