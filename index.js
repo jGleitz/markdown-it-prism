@@ -11,7 +11,7 @@ const DEFAULTS = {
  *
  * @param <String> lang
  *		Code of the language to load.
- * @return <Object?> The prism language object for the provided <code>lang</code> code. <code>undefined</code> if the code is not known to prism.
+ * @return <Object?> The Prism language object for the provided <code>lang</code> code. <code>undefined</code> if the code is not known to Prism.
  */
 function loadPrismLang(lang) {
 	let langObject = Prism.languages[lang];
@@ -43,13 +43,13 @@ function loadPrismPlugin(name) {
  * 		The text to highlight.
  * @param <String> lang
  *		Code of the language to highlight the text in.
- * @return <String> If Prism can highlight <code>text</code> in using <code>lang</code>, the highlighted code. Unchanged <code>text</code> otherwise.
+ * @return <String> <code>text</code> wrapped in <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code>, both equipped with the appropriate class (markdown-it’s langPrefix + lang). If Prism knows <code>lang</code>, <code>text</code> will be highlighted by it.
  */
 function highlight(markdownit, text, lang) {
 	const prismLang = loadPrismLang(lang);
-	if (prismLang) {
-		return `<pre class="${markdownit.options.langPrefix}${lang}"><code class="${markdownit.options.langPrefix}${lang}">\n\t${Prism.highlight(text, prismLang)}</code></pre>`;
-	}
+	const code = prismLang ? Prism.highlight(text, prismLang) : markdownit.utils.escapeHtml(text);
+	const classAttribute = lang ? ` class="${markdownit.options.langPrefix}${lang}"` : '';
+	return `<pre${classAttribute}><code${classAttribute}>\n\t${code}</code></pre>`;
 }
 
 function markdownItPrism(markdownit, useroptions) {
