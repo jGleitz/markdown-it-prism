@@ -40,13 +40,13 @@
     "prismjs": "^1.5.1"
   },
   "devDependencies": {
+    "markdown-it": "^8.0.0",
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-latest": "^6.16.0",
     "chai": "*",
     "chai-string": "^1.2.0",
     "eslint": "^3.8.0",
-    "markdown-it": "^8.0.0",
     "mocha": "*"
   },
   "babel": {
