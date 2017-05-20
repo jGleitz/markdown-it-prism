@@ -3,6 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+ * Add the `language-*` class also to the `<pre>` tag (not only to `<code>`).
 
 ## [1.0.1] 2016-10-19
  * Fixed build bug that led to the plugin not being exported correctly.
