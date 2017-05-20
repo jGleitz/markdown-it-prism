@@ -12,25 +12,11 @@ const read = path => fs.readFileSync(`testdata/${path}`).toString();
 
 describe('markdown-it-prism', () => {
 
-	const input = read('input/test.md');
-
-	it('should highlight fenced code blocks using Prism', () => {
+	it('highlights fenced code blocks with language specification using Prism', () => {
 		expect(markdownit()
 			.use(markdownItPrism)
-			.render(input)
-		).to.equalIgnoreSpaces(read('expected/normal.html'));
-	});
-
-	it('should allow to use Prism plugins', () => {
-		expect(markdownit()
-			.use(markdownItPrism, {
-				plugins: [
-					'highlight-keywords',
-					'show-language'
-				]
-			})
-			.render(input)
-		).to.equalIgnoreSpaces(read('expected/plugins.html'));
+			.render(read('input/fenced-with-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language.html'));
 	});
 
 	it('throws for unknown plugins', () => {
@@ -50,5 +36,50 @@ describe('markdown-it-prism', () => {
 				}
 			});
 		expect(called).to.be.true;
+	});
+
+	it('does not add classes to fenced code blocks without language specification', () => {
+		expect(markdownit()
+			.use(markdownItPrism)
+			.render(read('input/fenced-without-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-without-language.html'));
+	});
+
+	it('does not add classes to indented code blocks', () => {
+		expect(markdownit()
+			.use(markdownItPrism)
+			.render(read('input/indented.md'))
+		).to.equalIgnoreSpaces(read('expected/indented.html'));
+
+	});
+
+	it('adds classes even if the language is unknown', () => {
+		expect(markdownit()
+			.use(markdownItPrism)
+			.render(read('input/fenced-with-unknown-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-unknown-language.html'));
+	});
+
+	it('respects markdown-it’s langPrefix setting', () => {
+		expect(
+			markdownit({
+				langPrefix: 'test-'
+			})
+			.use(markdownItPrism)
+			.render(read('input/fenced-with-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language-prefix.html'));
+	});
+
+	// This test must be the last one, as the plugins get loaded into Prism and cannot be unloaded!
+	it('allows to use Prism plugins', () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				plugins: [
+					'highlight-keywords',
+					'show-language'
+				]
+			})
+			.render(read('input/fenced-with-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language-plugins.html'));
 	});
 });
