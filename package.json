@@ -37,10 +37,10 @@
     "test": "npm run lint && npm run unittest"
   },
   "dependencies": {
-    "prismjs": "^1.5.1",
-    "markdown-it": "^8.0.0"
+    "prismjs": "^1.5.1"
   },
   "devDependencies": {
+    "markdown-it": "^8.0.0",
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-latest": "^6.16.0",
