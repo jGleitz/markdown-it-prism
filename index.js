@@ -11,7 +11,7 @@ const DEFAULTS = {
  *
  * @param <String> lang
  *		Code of the language to load.
- * @return <Object?> The prism language object for the provided <code>lang</code> code. <code>undefined</code> if the code is not known to prism.
+ * @return <Object?> The Prism language object for the provided <code>lang</code> code. <code>undefined</code> if the code is not known to Prism.
  */
 function loadPrismLang(lang) {
 	let langObject = Prism.languages[lang];
@@ -29,7 +29,7 @@ function loadPrismLang(lang) {
 function loadPrismPlugin(name) {
 	try {
 		require(`prismjs/plugins/${name}/prism-${name}`);
-	} catch(e) {
+	} catch (e) {
 		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`);
 	}
 }
@@ -37,17 +37,19 @@ function loadPrismPlugin(name) {
 /**
  * Highlights the provided text using Prism.
  *
+ * @param <MarkdownIt> markdownit
+ * 		Instance of MarkdownIt Class. This argument is bound in markdownItPrism().
  * @param <String> text
  * 		The text to highlight.
  * @param <String> lang
  *		Code of the language to highlight the text in.
- * @return <String> If Prism can highlight <code>text</code> in using <code>lang</code>, the highlighted code. Unchanged <code>text</code> otherwise.
+ * @return <String> <code>text</code> wrapped in <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code>, both equipped with the appropriate class (markdown-it’s langPrefix + lang). If Prism knows <code>lang</code>, <code>text</code> will be highlighted by it.
  */
-function highlight(text, lang) {
+function highlight(markdownit, text, lang) {
 	const prismLang = loadPrismLang(lang);
-	if (prismLang) {
-		return Prism.highlight(text, prismLang);
-	}
+	const code = prismLang ? Prism.highlight(text, prismLang) : markdownit.utils.escapeHtml(text);
+	const classAttribute = lang ? ` class="${markdownit.options.langPrefix}${lang}"` : '';
+	return `<pre${classAttribute}><code${classAttribute}>\n\t${code}</code></pre>`;
 }
 
 function markdownItPrism(markdownit, useroptions) {
@@ -57,7 +59,7 @@ function markdownItPrism(markdownit, useroptions) {
 	options.init(Prism);
 
 	// register ourselves as highlighter
-	markdownit.options.highlight = highlight;
+	markdownit.options.highlight = (...args) => highlight(markdownit, ...args);
 }
 
 export default markdownItPrism;
