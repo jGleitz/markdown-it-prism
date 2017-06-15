@@ -44,10 +44,10 @@
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-latest": "^6.16.0",
-    "chai": "*",
+    "chai": "^4.0.0",
     "chai-string": "^1.2.0",
     "eslint": "^4.0.0",
-    "mocha": "*"
+    "mocha": "^3.4.2"
   },
   "babel": {
     "presets": [
