@@ -65,8 +65,8 @@ describe('markdown-it-prism', () => {
 			markdownit({
 				langPrefix: 'test-'
 			})
-			.use(markdownItPrism)
-			.render(read('input/fenced-with-language.md'))
+				.use(markdownItPrism)
+				.render(read('input/fenced-with-language.md'))
 		).to.equalIgnoreSpaces(read('expected/fenced-with-language-prefix.html'));
 	});
 
