@@ -40,18 +40,18 @@
     "prismjs": "^1.5.1"
   },
   "devDependencies": {
-    "markdown-it": "^8.0.0",
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-latest": "^6.16.0",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.0.0",
     "chai-string": "^1.2.0",
     "eslint": "^4.0.0",
+    "markdown-it": "^8.0.0",
     "mocha": "^3.4.2"
   },
   "babel": {
     "presets": [
-      "latest"
+      "env"
     ],
     "plugins": [
       "add-module-exports"
