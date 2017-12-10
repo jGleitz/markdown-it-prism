@@ -31,7 +31,7 @@
   "scripts": {
     "build": "babel *.js -d build",
     "lint": "eslint *.js",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "pretest": " npm run build",
     "unittest": "mocha build/test.js",
     "test": "npm run lint && npm run unittest"
