@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [1.1.2] – 2018-03-17
+ * Upgrade dependencies
+
 ## [1.1.1] – 2017-05-22
  * Removed a bad `\n\t` before the code that was affecting the HTML output.
 
@@ -17,7 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
-[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/jGleitz/markdown-it-prism/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v1.0.0...v1.0.1
