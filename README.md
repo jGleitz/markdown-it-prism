@@ -9,6 +9,8 @@ const prism = require('markdown-it-prism');
 md.use(prism, options);
 ```
 
+The plugin will insert the necessary markup into all code blocks. [Include one of Prism’s stylesheets](http://prismjs.com/#basic-usage) in your HTML to get highlighted code.
+
 ### Options
 The `options` object may contain:
 

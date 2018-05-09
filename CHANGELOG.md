@@ -3,6 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+ * Note about adding a stylesheet to the HTML in README
 
 ## [1.1.2] – 2018-03-17
  * Upgrade dependencies
