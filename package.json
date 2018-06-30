@@ -45,7 +45,7 @@
     "babel-preset-env": "^1.6.1",
     "chai": "^4.0.0",
     "chai-string": "^1.2.0",
-    "eslint": "^4.0.0",
+    "eslint": "^5.0.0",
     "markdown-it": "^8.0.0",
     "mocha": "^5.0.0"
   },
