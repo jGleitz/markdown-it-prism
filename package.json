@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-add-module-exports": "^0.3.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.0.0",
     "chai-string": "^1.2.0",
