@@ -37,17 +37,17 @@
     "test": "npm run lint && npm run unittest"
   },
   "dependencies": {
-    "prismjs": "^1.5.1"
+    "prismjs": "^1.15.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-preset-env": "^1.6.1",
-    "chai": "^4.0.0",
-    "chai-string": "^1.2.0",
-    "eslint": "^5.0.0",
-    "markdown-it": "^8.0.0",
-    "mocha": "^5.0.0"
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "chai-string": "^1.5.0",
+    "eslint": "^5.9.0",
+    "markdown-it": "^8.4.2",
+    "mocha": "^5.2.0"
   },
   "babel": {
     "presets": [
