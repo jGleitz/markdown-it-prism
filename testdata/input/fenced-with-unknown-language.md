@@ -1,6 +1,6 @@
 # Test
 
-This is a fenced code block with language specification of an unknown language:
+This is a fenced code block:
 
 ```this-is-not-a-language
 public class Foo() {
