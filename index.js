@@ -17,7 +17,7 @@ const DEFAULTS = {
  * @return <Object?> The Prism language object for the provided <code>lang</code> code. <code>undefined</code> if the code is not known to Prism.
  */
 function loadPrismLang(lang) {
-	if (!lang) return null;
+	if (!lang) return undefined;
 	let langObject = Prism.languages[lang];
 	if (langObject === undefined) {
 		try {
