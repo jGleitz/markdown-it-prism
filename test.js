@@ -26,6 +26,27 @@ describe('markdown-it-prism', () => {
 			})).to.throw(Error, /plugin/);
 	});
 
+	it('throws for unknown defaultLanguage', () => {
+		expect(() => markdownit()
+			.use(markdownItPrism, {
+				defaultLanguage: 'i-dont-exist'
+			})).to.throw(Error, /defaultLanguage.*i-dont-exist/);
+	});
+
+	it('throws for unknown defaultLanguageForUnknown', () => {
+		expect(() => markdownit()
+			.use(markdownItPrism, {
+				defaultLanguageForUnknown: 'i-dont-exist'
+			})).to.throw(Error, /defaultLanguageForUnknown.*i-dont-exist/);
+	});
+
+	it('throws for unknown defaultLanguageForUnspecified', () => {
+		expect(() => markdownit()
+			.use(markdownItPrism, {
+				defaultLanguageForUnspecified: 'i-dont-exist'
+			})).to.throw(Error, /defaultLanguageForUnspecified.*i-dont-exist/);
+	});
+
 	it('offers an init function for further initialisation', () => {
 		let called = false;
 		markdownit()
@@ -45,6 +66,24 @@ describe('markdown-it-prism', () => {
 		).to.equalIgnoreSpaces(read('expected/fenced-without-language.html'));
 	});
 
+	it('falls back to defaultLanguageForUnspecified if no language is specified', () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				defaultLanguageForUnspecified: 'java'
+			})
+			.render(read('input/fenced-without-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language.html'));
+	});
+
+	it('falls back to defaultLanguage if no language and no defaultLanguageForUnspecified is specified', () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				defaultLanguage: 'java'
+			})
+			.render(read('input/fenced-without-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language.html'));
+	});
+
 	it('does not add classes to indented code blocks', () => {
 		expect(markdownit()
 			.use(markdownItPrism)
@@ -58,6 +97,24 @@ describe('markdown-it-prism', () => {
 			.use(markdownItPrism)
 			.render(read('input/fenced-with-unknown-language.md'))
 		).to.equalIgnoreSpaces(read('expected/fenced-with-unknown-language.html'));
+	});
+
+	it('falls back to defaultLanguageForUnknown if the specified language is unknown', () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				defaultLanguageForUnknown: 'java'
+			})
+			.render(read('input/fenced-with-unknown-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language.html'));
+	});
+
+	it('falls back to defaultLanguage if the specified language is unknown and no defaultLanguageForUnknown is specified', () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				defaultLanguage: 'java'
+			})
+			.render(read('input/fenced-with-unknown-language.md'))
+		).to.equalIgnoreSpaces(read('expected/fenced-with-language.html'));
 	});
 
 	it('respects markdown-it’s langPrefix setting', () => {

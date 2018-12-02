@@ -1,6 +1,6 @@
 # Test
 
-This is a fenced code block with language specification:
+This is a fenced code block:
 
 ```java
 public class Foo() {

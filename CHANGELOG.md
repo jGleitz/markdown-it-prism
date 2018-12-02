@@ -3,8 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+### Deprecated
  * Deprecate Node.JS 4 and require Node.JS >= 6
+### Added
  * Note about adding a stylesheet to the HTML in README
+ * Options `defaultLanguage`, `defaultLanguageForUnknown` and `defaultLanguageForUnspecified` to specify fallback prism languages
+### Fixed
+ * Update all packages and eliminate dependency versions with known security issues
 
 ## [1.1.2] – 2018-03-17
  * Upgrade dependencies
