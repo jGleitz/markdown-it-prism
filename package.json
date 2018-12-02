@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-prism",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Highlights code blocks in markdown-it using Prism.",
   "keywords": [
     "markdown-it",
@@ -18,7 +18,8 @@
   "files": [
     "README.md",
     "LICENSE",
-    "build/index.js"
+    "build/index.js",
+    "CHANGELOG.md"
   ],
   "main": "build/index.js",
   "engines": {
