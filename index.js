@@ -89,7 +89,7 @@ function checkLanguage(options, optionName) {
 	}
 }
 
-function markdownItPrism(markdownit, useroptions) {
+export default function markdownItPrism(markdownit, useroptions) {
 	const options = Object.assign({}, DEFAULTS, useroptions);
 
 	checkLanguage(options, 'defaultLanguage');
@@ -104,5 +104,3 @@ function markdownItPrism(markdownit, useroptions) {
 	// register ourselves as highlighter
 	markdownit.options.highlight = (...args) => highlight(markdownit, options, ...args);
 }
-
-export default markdownItPrism;
