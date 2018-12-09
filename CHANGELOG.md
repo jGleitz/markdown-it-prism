@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [2.0.1] – 2018-12-09
+### Fixed
+ * Regression that exported the module’s main function only under the `default` key, not also as default export ([#17](https://github.com/jGleitz/markdown-it-prism/issues/17))
+
 ## [2.0.0] – 2018-12-02
 ### Deprecated
  * Deprecate Node.JS 4 and require Node.JS >= 6
@@ -31,7 +35,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
-[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.2...v2.0.0
 [1.1.2]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.0...v1.1.1
