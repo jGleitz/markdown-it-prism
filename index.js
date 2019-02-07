@@ -45,7 +45,8 @@ function loadPrismLang(lang) {
 	let langObject = Prism.languages[lang];
 	if (langObject === undefined) {
 		try {
-			require('prismjs/components/prism-' + lang);
+			var loadLanguages = require('prismjs/components/');
+			loadLanguages([lang]);
 			return Prism.languages[lang];
 		} catch (e) {
 			// nothing to do
