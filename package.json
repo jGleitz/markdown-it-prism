@@ -49,6 +49,6 @@
     "chai-string": "^1.5.0",
     "eslint": "^5.9.0",
     "markdown-it": "^8.4.2",
-    "mocha": "^5.2.0"
+    "mocha": "^6.0.0"
   }
 }
