@@ -1,4 +1,5 @@
 import Prism from 'prismjs';
+import loadLanguages from 'prismjs/components/';
 
 /**
  * A callback that can be used to perform custom initialisation of the Prism instance.
@@ -45,7 +46,7 @@ function loadPrismLang(lang) {
 	let langObject = Prism.languages[lang];
 	if (langObject === undefined) {
 		try {
-			require('prismjs/components/prism-' + lang);
+			loadLanguages([lang]);
 			return Prism.languages[lang];
 		} catch (e) {
 			// nothing to do
