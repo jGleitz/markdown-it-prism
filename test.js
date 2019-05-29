@@ -127,6 +127,13 @@ describe('markdown-it-prism', () => {
 		).to.equalIgnoreSpaces(read('expected/fenced-with-language-prefix.html'));
 	});
 
+	it('is able to resolve C++ correctly', () => {
+		expect(markdownit()
+			.use(markdownItPrism)
+			.render(read('input/cpp.md'))
+		).to.equalIgnoreSpaces(read('expected/cpp.html'));
+	});
+
 	// This test must be the last one, as the plugins get loaded into Prism and cannot be unloaded!
 	it('allows to use Prism plugins', () => {
 		expect(markdownit()
