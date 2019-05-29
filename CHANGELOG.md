@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## [2.0.2] – 2019-05-29
+### Fixed
+ * Languages that have dependencies are now resolved correctly ([#22](https://github.com/jGleitz/markdown-it-prism/issues/22), thanks to @jlice and @RunDevelopment!)
+ * Test cases have been adapted to new output of markdown-it prism Java
+
 ## [2.0.1] – 2018-12-09
 ### Fixed
  * Regression that exported the module’s main function only under the `default` key, not also as default export ([#17](https://github.com/jGleitz/markdown-it-prism/issues/17))
@@ -35,7 +40,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
-[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.1...HEAD
+[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.2...v2.0.0
 [1.1.2]: https://github.com/jGleitz/markdown-it-prism/compare/v1.1.1...v1.1.2
