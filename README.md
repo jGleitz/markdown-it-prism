@@ -21,3 +21,34 @@ Name   | Description | Default
 `defaultLanguageForUnknown` | The language to use for code blocks that specify a language that Prism does not know. No default will be used if this option is `undefined`. | `undefined`
 `defaultLanguageForUnspecified` | The language to use for code block that do not specify a language. No default will be used if this option is `undefined`. | `undefined`
 `defaultLanguage` | Shorthand to set both `defaultLanguageForUnknown` and `defaultLanguageForUnspecified` to the same value. | `undefined`
+
+## Usage with Webpack
+If you want to use this plugin together with [Webpack](https://webpack.js.org/), you need to import all languages you intend to use:
+
+```javascript
+import MarkdownIt from 'markdown-it';
+import prism from 'markdown-it-prism';
+
+import "prismjs/components/prism-clike"
+import "prismjs/components/prism-java"
+
+function component() {
+  const md = new MarkdownIt();
+  md.use(prism);
+  const element = document.createElement('div');
+  element.innerHTML = md.render(`
+Here is some *code*:
+\`\`\`java
+public class Test {
+  public void foo() {}
+}
+\`\`\`
+`);
+
+  return element;
+}
+
+document.body.appendChild(component());
+```
+
+*Beware*: Prisms languages have dependencies onto each other. You need to import the languages together with their dependencies in the correct order.
