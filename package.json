@@ -37,7 +37,7 @@
     "test": "npm run lint && npm run unittest"
   },
   "dependencies": {
-    "prismjs": "1.16.0"
+    "prismjs": "1.19.0"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
