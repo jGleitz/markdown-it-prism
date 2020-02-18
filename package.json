@@ -23,7 +23,7 @@
   ],
   "main": "build/index.js",
   "engines": {
-    "node": "13.8.0"
+    "node": "13.9.0"
   },
   "repository": {
     "type": "git",
