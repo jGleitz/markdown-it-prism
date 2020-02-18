@@ -2,6 +2,9 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.4] – 2020-02-18
+ * Updated Prism JS to 1.19
+ 
 ## [2.0.3] – 2019-09-07
  * Updated dependencies
 
@@ -41,6 +44,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
+[2.0.4]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.0...v2.0.1
