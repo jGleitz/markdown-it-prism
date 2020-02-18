@@ -44,11 +44,27 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "chai": "^4.2.0",
     "chai-string": "^1.5.0",
     "eslint": "^6.0.0",
+    "husky": "^4.2.3",
     "markdown-it": "^10.0.0",
-    "mocha": "^7.0.0"
+    "mocha": "^7.0.0",
+    "semantic-release": "^17.0.4"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
