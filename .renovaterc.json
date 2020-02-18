@@ -9,5 +9,6 @@
       "updateTypes": ["minor", "patch", "pin", "digest", "lockFileMaintenance"],
       "automerge": true
     }
-  ]
+  ],
+  "engines": { "enabled": false }
 }
