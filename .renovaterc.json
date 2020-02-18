@@ -10,5 +10,5 @@
       "automerge": true
     }
   ],
-  "engines": { "enabled": false }
+  "engines": { "pinVersions": false }
 }
