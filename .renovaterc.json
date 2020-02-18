@@ -2,5 +2,12 @@
   "extends": [
     "config:base"
   ],
-  "pinVersions": false
+  "pinVersions": true,
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch", "pin", "digest", "lockFileMaintenance"],
+      "automerge": true
+    }
+  ]
 }

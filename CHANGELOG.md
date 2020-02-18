@@ -2,8 +2,6 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased][unreleased]
-
 ## [2.0.3] – 2019-09-07
  * Updated dependencies
 
@@ -43,7 +41,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 – 2016-10-16
 * Initial release.
 
-[unreleased]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.3...HEAD
 [2.0.3]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/jGleitz/markdown-it-prism/compare/v2.0.0...v2.0.1
