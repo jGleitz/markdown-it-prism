@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/jGleitz/markdown-it-prism/compare/v2.0.4...v2.0.5) (2020-03-02)
+
+
+### Bug Fixes
+
+* node >=10.0.0 is supported ([1a442a0](https://github.com/jGleitz/markdown-it-prism/commit/1a442a00fcfdbf155db96e18a84e831a1da61b67))
+
 # [Changelog](http://keepachangelog.com/)
 
 This project adheres to [Semantic Versioning](http://semver.org/).
