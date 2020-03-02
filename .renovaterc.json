@@ -6,9 +6,12 @@
   "lockFileMaintenance": { "enabled": true },
   "packageRules": [
     {
+      "depTypeList": ["engines"],
+      "enabled": false
+    },
+    {
       "updateTypes": ["minor", "patch", "pin", "digest", "lockFileMaintenance"],
       "automerge": true
     }
-  ],
-  "engines": { "pinVersions": false }
+  ]
 }
