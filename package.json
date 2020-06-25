@@ -55,7 +55,7 @@
     "husky": "4.2.5",
     "markdown-it": "11.0.0",
     "mocha": "8.0.1",
-    "semantic-release": "17.1.0"
+    "semantic-release": "17.1.1"
   },
   "commitlint": {
     "extends": [
