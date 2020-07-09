@@ -4,7 +4,8 @@
       "targets": {
         "node": "6"
       }
-    }]
+    }],
+    "@babel/preset-typescript"
   ],
   "plugins": [
     ["add-module-exports", {
