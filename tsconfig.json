@@ -6,6 +6,10 @@
     "noEmit": true,
     "strict": true,
     "isolatedModules": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ]
   }
 }
