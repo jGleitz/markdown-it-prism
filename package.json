@@ -18,10 +18,12 @@
   "files": [
     "README.md",
     "LICENSE",
+    "CHANGELOG.md",
     "build/index.js",
-    "CHANGELOG.md"
+    "build/index.d.ts"
   ],
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "engines": {
     "node": ">=6.0.0"
   },
@@ -30,11 +32,14 @@
     "url": "https://github.com/jGleitz/markdown-it-prism.git"
   },
   "scripts": {
-    "build": "babel *.js -d build",
-    "lint": "eslint *.js",
-    "prepare": "npm run build",
-    "unittest": "mocha test/test.ts",
-    "test": "npm run lint && npm run unittest"
+    "build:transpile": "babel ./src --out-dir build --extensions '.ts'",
+    "build:types": "tsc --project src",
+    "lint": "npm-run-all lint:*",
+    "lint:types": "tsc",
+    "lint:style": "eslint .",
+    "prepack": "npm-run-all build:*",
+    "unittest": "jest",
+    "test": "npm-run-all lint:* unittest"
   },
   "dependencies": {
     "prismjs": "1.20.0"
