@@ -14,6 +14,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * publish Typescript types ([35ba58b](https://github.com/jGleitz/markdown-it-prism/commit/35ba58b26afed6d149481b4840886cf156bc0d0b))
 
+# [2.1.0](https://github.com/jGleitz/markdown-it-prism/compare/v2.0.6...v2.1.0) (2020-07-09)
+
+
+### Bug Fixes
+
+* only require Node.JS >= 6 ([5a4176c](https://github.com/jGleitz/markdown-it-prism/commit/5a4176c8ab083f8d395cd07f2ff042e219060894))
+
+
+### Features
+
+* publish Typescript types ([35ba58b](https://github.com/jGleitz/markdown-it-prism/commit/35ba58b26afed6d149481b4840886cf156bc0d0b))
+
 ## [2.0.6](https://github.com/jGleitz/markdown-it-prism/compare/v2.0.5...v2.0.6) (2020-07-06)
 
 
