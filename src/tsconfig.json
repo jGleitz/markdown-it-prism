@@ -4,6 +4,10 @@
     "declaration": true,
     "declarationDir": "../build",
     "noEmit": false,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "typeRoots": [
+      "../types",
+      "../node_modules/@types"
+    ]
   }
 }
