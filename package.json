@@ -37,6 +37,7 @@
     "lint": "npm-run-all lint:*",
     "lint:types": "tsc",
     "lint:style": "eslint .",
+    "lint:commits": "commitlint --from=semantic-commit-start --to=HEAD",
     "prepack": "npm-run-all build:*",
     "unittest": "jest",
     "test": "npm-run-all lint:* unittest"
