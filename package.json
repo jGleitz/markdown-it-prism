@@ -69,11 +69,6 @@
     "semantic-release": "17.1.1",
     "typescript": "^3.9.6"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
@@ -84,19 +79,20 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/npm",
+      "@semantic-release/github",
       [
-        "@semantic-release/github",
+        "@semantic-release/changelog",
+        {
+          "changelogTitle": "# [Changelog](http://keepachangelog.com/)\n\nThis project adheres to [Semantic Versioning](http://semver.org/)."
+        }
+      ],
+      [
+        "@semantic-release/git",
         {
           "assets": [
             "CHANGELOG.md",
             "package.json"
           ]
-        }
-      ],
-      [
-        "@semantic-release/changelog",
-        {
-          "changelogTitle": "# [Changelog](http://keepachangelog.com/)\n\nThis project adheres to [Semantic Versioning](http://semver.org/)."
         }
       ]
     ]
