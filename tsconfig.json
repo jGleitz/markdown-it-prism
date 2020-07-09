@@ -3,13 +3,9 @@
     "target": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
-    "declaration": true,
-    "declarationDir": "./build",
-    // Don't emit; allow Babel to transform files.
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "strict": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "typeRoots": ["node_modules/@types", "types"]
+    "esModuleInterop": true
   }
 }
