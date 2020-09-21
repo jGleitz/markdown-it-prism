@@ -37,7 +37,6 @@
     "lint": "npm-run-all lint:*",
     "lint:types": "tsc",
     "lint:style": "eslint .",
-    "lint:commits": "commitlint --from=semantic-commit-start --to=HEAD",
     "prepack": "npm-run-all build:*",
     "unittest": "jest",
     "test": "npm-run-all lint:* unittest"
@@ -51,8 +50,6 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-typescript": "7.10.4",
     "@babel/register": "7.11.5",
-    "@commitlint/cli": "11.0.0",
-    "@commitlint/config-conventional": "11.0.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
     "@types/jest": "26.0.14",
@@ -62,17 +59,11 @@
     "@typescript-eslint/parser": "4.1.1",
     "babel-plugin-add-module-exports": "1.0.4",
     "eslint": "7.9.0",
-    "husky": "4.3.0",
     "jest": "26.4.2",
     "markdown-it": "11.0.1",
     "npm-run-all": "4.1.5",
     "semantic-release": "17.1.2",
     "typescript": "4.0.3"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "release": {
     "plugins": [
