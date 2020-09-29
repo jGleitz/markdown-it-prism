@@ -106,7 +106,7 @@ function selectLanguage(options: Options, lang: string): [string, Grammar | unde
 function highlight(markdownit: MarkdownIt, options: Options, text: string, lang: string): string {
 	const [langToUse, prismLang] = selectLanguage(options, lang)
 	const code = prismLang ? Prism.highlight(text, prismLang, langToUse) : markdownit.utils.escapeHtml(text)
-	const classAttribute = langToUse ? ` class="${markdownit.options.langPrefix}${langToUse}"` : ''
+	const classAttribute = langToUse ? ` class="${markdownit.options.langPrefix}${markdownit.utils.escapeHtml(langToUse)}"` : ''
 	return `<pre${classAttribute}><code${classAttribute}>${code}</code></pre>`
 }
 
