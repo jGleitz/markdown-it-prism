@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.2](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.1...v2.1.2) (2020-09-29)
+
+
+### Bug Fixes
+
+* escape the language class name so it cannot be used to inject HTML ([#137](https://github.com/jGleitz/markdown-it-prism/issues/137)) ([c1c074b](https://github.com/jGleitz/markdown-it-prism/commit/c1c074b88f7ad5a2eeb5eb9e12dde02fc4544946))
+
 ## [2.1.1](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.0...v2.1.1) (2020-08-07)
 
 
