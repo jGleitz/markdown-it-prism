@@ -62,7 +62,7 @@
     "jest": "26.6.3",
     "markdown-it": "12.0.2",
     "npm-run-all": "4.1.5",
-    "semantic-release": "17.2.4",
+    "semantic-release": "17.3.0",
     "typescript": "4.1.2"
   },
   "release": {
