@@ -151,5 +151,5 @@ export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Opt
 	options.init(Prism)
 
 	// register ourselves as highlighter
-	markdownit.options.highlight = (...args) => highlight(markdownit, options, ...args)
+	markdownit.options.highlight = (text, lang) => highlight(markdownit, options, text, lang)
 }
