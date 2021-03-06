@@ -10,7 +10,7 @@
     "prismjs"
   ],
   "homepage": "https://github.com/jGleitz/markdown-it-prism",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "author": {
     "name": "Joshua Gleitze",
     "url": "https://joshuagleitze.de"
