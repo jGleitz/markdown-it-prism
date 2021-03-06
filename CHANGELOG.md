@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.6](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.5...v2.1.6) (2021-03-06)
+
+
+### Bug Fixes
+
+* declare MIT licence in package.json ([6871e22](https://github.com/jGleitz/markdown-it-prism/commit/6871e2217bcea1d21f9b61fa96a8f315d0a2c1e8))
+
 ## [2.1.5](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.4...v2.1.5) (2021-03-06)
 
 
