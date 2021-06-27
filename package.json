@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-prism",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Highlights code blocks in markdown-it using Prism.",
   "keywords": [
     "markdown-it",
