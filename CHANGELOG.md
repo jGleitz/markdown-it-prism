@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# [2.2.0](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.8...v2.2.0) (2021-08-23)
+
+
+### Features
+
+* compatibility with markdown-it-attrs ([9b2eca1](https://github.com/jGleitz/markdown-it-prism/commit/9b2eca1900f13bc9affef99cebc82c8ddd901f18))
+
 ## [2.1.8](https://github.com/jGleitz/markdown-it-prism/compare/v2.1.7...v2.1.8) (2021-07-03)
 
 
