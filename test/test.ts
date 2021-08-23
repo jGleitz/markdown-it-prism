@@ -1,4 +1,6 @@
 import markdownit from 'markdown-it'
+// @ts-ignore markdown-it-attrs has no types and it’s not worth the effort adding a *.d.ts file
+import markdownItAttrs from 'markdown-it-attrs'
 import markdownItPrism from '../src'
 import fs from 'fs'
 
@@ -133,8 +135,14 @@ describe('markdown-it-prism', () => {
 
 	describe('plugin support', () => {
 
-		afterEach(() => {
-			jest.resetModules()
+		afterEach(() => jest.resetModules())
+
+		it('allows to use markdown-it-attrs', async () => {
+			expect(markdownit()
+				.use(markdownItPrism)
+				.use(markdownItAttrs)
+				.render(await read('input/with-attrs.md'))
+			).toEqual(await read('expected/fenced-with-attrs.html'))
 		})
 
 		it('allows to use Prism plugins', async () => {
