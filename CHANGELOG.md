@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.3](https://github.com/jGleitz/markdown-it-prism/compare/v2.2.2...v2.2.3) (2022-02-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency prismjs to v1.27.0 ([9d51407](https://github.com/jGleitz/markdown-it-prism/commit/9d51407837223cf8a0c39220ef6fb703b5b02c07))
+
 ## [2.2.2](https://github.com/jGleitz/markdown-it-prism/compare/v2.2.1...v2.2.2) (2022-01-06)
 
 
