@@ -58,7 +58,7 @@
     "@typescript-eslint/eslint-plugin": "5.25.0",
     "@typescript-eslint/parser": "5.25.0",
     "babel-plugin-add-module-exports": "1.0.4",
-    "eslint": "8.15.0",
+    "eslint": "8.16.0",
     "jest": "28.1.0",
     "markdown-it": "12.3.2",
     "markdown-it-attrs": "4.1.4",
