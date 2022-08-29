@@ -2,10 +2,12 @@
 
 This is a fenced code block:
 
-```this-is-not-a-language
+```java
 public class Foo() {
-	public Foo(bar) {
+	public Foo(String bar) {
 		System.out.println(bar);
 	}
 }
 ```
+
+And here’s inline `class Demo { };`{language=cpp}

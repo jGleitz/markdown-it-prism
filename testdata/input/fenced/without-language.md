@@ -4,7 +4,7 @@ This is a fenced code block:
 
 ```
 public class Foo() {
-	public Foo(bar) {
+	public Foo(String bar) {
 		System.out.println(bar);
 	}
 }
