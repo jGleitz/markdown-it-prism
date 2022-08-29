@@ -3,7 +3,7 @@
 This is an indented code block:
 
 	public class Foo() {
-		public Foo(bar) {
+		public Foo(String bar) {
 			System.out.println(bar);
 		}
 	}

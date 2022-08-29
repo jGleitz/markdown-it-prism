@@ -1,9 +1,18 @@
 import Prism, {Grammar} from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 import MarkdownIt from 'markdown-it'
-import {RenderRule} from 'markdown-it/lib/renderer'
+import Renderer, {RenderRule} from 'markdown-it/lib/renderer'
+import StateCore from 'markdown-it/lib/rules_core/state_core'
+import Token from 'markdown-it/lib/token'
+
+const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
+type SelectedPrismLanguage = [string, Grammar | undefined]
 
 interface Options {
+	/**
+	 * Whether to highlight inline code. Defaults to `false`.
+	 */
+	highlightInlineCode: boolean
 	/**
 	 * Prism plugins to load.
 	 */
@@ -29,6 +38,7 @@ interface Options {
 }
 
 const DEFAULTS: Options = {
+	highlightInlineCode: false,
 	plugins: [],
 	init: () => {
 		// do nothing by default
@@ -108,7 +118,24 @@ function selectLanguage(options: Options, lang: string): [string, Grammar | unde
  *  html-escaped.
  */
 function highlight(markdownit: MarkdownIt, options: Options, text: string, lang: string): string {
-	const [langToUse, prismLang] = selectLanguage(options, lang)
+	return highlightWithSelectedLanguage(markdownit, options, text, selectLanguage(options, lang))
+}
+
+/**
+ * Highlights the provided text using Prism.
+ *
+ * @param markdownit
+ *        The markdown-it instance.
+ * @param options
+ *        The options that have been used to initialise the plugin.
+ * @param text
+ *        The text to highlight.
+ * @param lang
+ *        The selected Prism language to use for highlighting.
+ * @return If Prism knows the language that {@link selectLanguage} returns for `lang`, the `text` highlighted for that language. Otherwise, `text`
+ *  html-escaped.
+ */
+function highlightWithSelectedLanguage(markdownit: MarkdownIt, options: Options, text: string, [langToUse, prismLang]: SelectedPrismLanguage): string {
 	return prismLang ? Prism.highlight(text, prismLang, langToUse) : markdownit.utils.escapeHtml(text)
 }
 
@@ -122,7 +149,43 @@ function highlight(markdownit: MarkdownIt, options: Options, text: string, lang:
  * @return the class to use for `lang`.
  */
 function languageClass(markdownit: MarkdownIt, lang: string): string {
-	return markdownit.options.langPrefix + markdownit.utils.escapeHtml(lang)
+	return markdownit.options.langPrefix + lang
+}
+
+
+/**
+ * A {@link RuleCore} that searches for and extracts language specifications on inline code tokens.
+ */
+function inlineCodeLanguageRule(state: StateCore) {
+	for (const inlineToken of state.tokens) {
+		if (inlineToken.type === 'inline' && inlineToken.children !== null) {
+			for (const [index, token] of inlineToken.children.entries()) {
+				if (token.type === 'code_inline' && index + 1 < inlineToken.children.length) {
+					extractInlineCodeSpecifiedLanguage(token, inlineToken.children[index + 1])
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Searches for a language specification after an inline code token (e.g. ``{language=cpp}). If present, extracts the language, sets
+ * it on `inlineCodeToken`’s meta, and removes the specification.
+ *
+ * @param inlineCodeToken
+ *  The inline code token for which to extract the language.
+ * @param followingToken
+ *    The token immediately following the `inlineCodeToken`.
+ */
+function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingToken: Token) {
+	const languageSpecificationMatch = followingToken.content.match(/^\{((?:[^\s}]+\s)*)language=([^\s}]+)((?:\s[^\s}]+)*)}/)
+	if (languageSpecificationMatch !== null) {
+		inlineCodeToken.meta = {...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: languageSpecificationMatch[2]}
+		followingToken.content = followingToken.content.slice(languageSpecificationMatch[0].length)
+		if (languageSpecificationMatch[1] || languageSpecificationMatch[3]) {
+			followingToken.content = `{${languageSpecificationMatch[1] || ''}${(languageSpecificationMatch[3] || ' ').slice(1)}}${followingToken.content}`
+		}
+	}
 }
 
 /**
@@ -133,7 +196,7 @@ function languageClass(markdownit: MarkdownIt, lang: string): string {
  * @param options
  *        The options that have been used to initialise the plugin.
  * @param existingRule
- *        The currently configured render rule for fenced code blocks.
+ *        The previously configured render rule for fenced code blocks.
  */
 function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
 	return (tokens, idx, renderOptions, env, self) => {
@@ -146,13 +209,38 @@ function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingR
 		} else {
 			fenceToken.info = langToUse
 			const existingResult = existingRule(tokens, idx, renderOptions, env, self)
-			const langClass = languageClass(markdownit, langToUse)
+			const langClass = languageClass(markdownit, markdownit.utils.escapeHtml(langToUse))
 			return existingResult.replace(
 				/<((?:pre|code)[^>]*?)(?:\s+class="([^"]*)"([^>]*))?>/g,
 				(match, tagStart, existingClasses?: string, tagEnd?) =>
 					existingClasses?.includes(langClass) ? match
 						: `<${tagStart} class="${existingClasses ? `${existingClasses} ` : ''}${langClass}"${tagEnd || ''}>`
 			)
+		}
+	}
+}
+
+/**
+ * Renders inline code tokens by highlighting them with Prism.
+ *
+ * @param markdownit
+ *        The markdown-it instance.
+ * @param options
+ *        The options that have been used to initialise the plugin.
+ * @param existingRule
+ *        The previously configured render rule for inline code.
+ */
+function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
+	return (tokens, idx, renderOptions, env, self) => {
+		const inlineCodeToken = tokens[idx]
+		const specifiedLanguage = inlineCodeToken.meta ? (inlineCodeToken.meta[SPECIFIED_LANGUAGE_META_KEY] || '') : ''
+		const [langToUse, prismLang] = selectLanguage(options, specifiedLanguage)
+		if (!langToUse) {
+			return existingRule(tokens, idx, renderOptions, env, self)
+		} else {
+			const highlighted = highlightWithSelectedLanguage(markdownit, options, inlineCodeToken.content, [langToUse, prismLang])
+			inlineCodeToken.attrJoin('class', languageClass(markdownit, langToUse))
+			return `<code${self.renderAttrs(inlineCodeToken)}>${highlighted}</code>`
 		}
 	}
 }
@@ -174,6 +262,13 @@ function checkLanguageOption(
 	if (language !== undefined && loadPrismLang(language) === undefined) {
 		throw new Error(`Bad option ${optionName}: There is no Prism language '${language}'.`)
 	}
+}
+
+/**
+ * ‘the most basic rule to render a token’ (https://github.com/markdown-it/markdown-it/blob/master/docs/examples/renderer_rules.md)
+ */
+function renderFallback(tokens: Token[], idx: number, options: MarkdownIt.Options, env: unknown, self: Renderer): string {
+	return self.renderToken(tokens, idx, options)
 }
 
 /**
@@ -199,5 +294,9 @@ export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Opt
 
 	// register ourselves as highlighter
 	markdownit.options.highlight = (text, lang) => highlight(markdownit, options, text, lang)
-	markdownit.renderer.rules.fence = applyCodeAttributes(markdownit, options, markdownit.renderer.rules.fence || (() => ''))
+	markdownit.renderer.rules.fence = applyCodeAttributes(markdownit, options, markdownit.renderer.rules.fence || renderFallback)
+	if (options.highlightInlineCode) {
+		markdownit.core.ruler.after('inline', 'prism_inline_code_language', inlineCodeLanguageRule)
+		markdownit.renderer.rules.code_inline = renderInlineCode(markdownit, options, markdownit.renderer.rules.code_inline || renderFallback)
+	}
 }

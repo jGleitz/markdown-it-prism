@@ -2,9 +2,9 @@
 
 This is a fenced code block:
 
-```java {.classname data-custom=value}
+```this-is-not-a-language
 public class Foo() {
-	public Foo(bar) {
+	public Foo(String bar) {
 		System.out.println(bar);
 	}
 }
