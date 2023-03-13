@@ -52,7 +52,7 @@
     "@babel/register": "7.21.0",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
-    "@types/jest": "29.4.0",
+    "@types/jest": "29.4.1",
     "@types/markdown-it": "12.2.3",
     "@types/prismjs": "1.26.0",
     "@typescript-eslint/eslint-plugin": "5.54.1",
