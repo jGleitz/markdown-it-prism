@@ -45,9 +45,9 @@
     "prismjs": "1.29.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.22.5",
-    "@babel/core": "7.22.5",
-    "@babel/preset-env": "7.22.5",
+    "@babel/cli": "7.22.6",
+    "@babel/core": "7.22.6",
+    "@babel/preset-env": "7.22.6",
     "@babel/preset-typescript": "7.22.5",
     "@babel/register": "7.22.5",
     "@semantic-release/changelog": "6.0.3",
