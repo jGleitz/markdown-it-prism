@@ -46,9 +46,9 @@
   },
   "devDependencies": {
     "@babel/cli": "7.23.0",
-    "@babel/core": "7.23.0",
-    "@babel/preset-env": "7.22.20",
-    "@babel/preset-typescript": "7.23.0",
+    "@babel/core": "7.23.2",
+    "@babel/preset-env": "7.23.2",
+    "@babel/preset-typescript": "7.23.2",
     "@babel/register": "7.22.15",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
