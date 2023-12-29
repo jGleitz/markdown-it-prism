@@ -46,10 +46,10 @@
   },
   "devDependencies": {
     "@babel/cli": "7.23.4",
-    "@babel/core": "7.23.6",
-    "@babel/preset-env": "7.23.6",
+    "@babel/core": "7.23.7",
+    "@babel/preset-env": "7.23.7",
     "@babel/preset-typescript": "7.23.3",
-    "@babel/register": "7.22.15",
+    "@babel/register": "7.23.7",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/jest": "29.5.11",
