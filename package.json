@@ -25,7 +25,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=20.0.0"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
   "scripts": {
     "build:transpile": "babel ./src --out-dir build --extensions '.ts'",
     "build:types": "tsc --project src",
+    "build": "npm-run-all build:*",
     "lint": "npm-run-all lint:*",
     "lint:types": "tsc",
     "lint:style": "eslint .",
