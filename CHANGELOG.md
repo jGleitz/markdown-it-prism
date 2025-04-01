@@ -2,6 +2,16 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# [3.0.0](https://github.com/jGleitz/markdown-it-prism/compare/v2.3.1...v3.0.0) (2025-04-01)
+
+
+* fix!: require Node.JS >=v20, test against v20-v23 ([0f68ca1](https://github.com/jGleitz/markdown-it-prism/commit/0f68ca1910b207e2f89e2e9c54dfdc580adfcbc9))
+
+
+### BREAKING CHANGES
+
+* This package now requires Node.JS >= v20
+
 ## [2.3.1](https://github.com/jGleitz/markdown-it-prism/compare/v2.3.0...v2.3.1) (2025-03-11)
 
 
