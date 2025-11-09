@@ -1,16 +1,15 @@
 import markdownit from 'markdown-it'
 
 import markdownItPrism from '../src'
-import {read} from './util'
+import { read } from './util'
 
 const codeSectionTypeSettings = {
-	'fenced': {},
-	'inline': {highlightInlineCode: true}
+	fenced: {},
+	inline: { highlightInlineCode: true },
 }
 
 describe('code highlighting', () => {
 	Object.entries(codeSectionTypeSettings).forEach(([codeSectionType, options]) => describe(`${codeSectionType} code`, () => {
-
 		it('highlights code with a language specification using Prism', async () => {
 			expect(markdownit()
 				.use(markdownItPrism, options)
@@ -29,7 +28,7 @@ describe('code highlighting', () => {
 			expect(markdownit()
 				.use(markdownItPrism, {
 					defaultLanguageForUnspecified: 'java',
-					...options
+					...options,
 				})
 				.render(await read(`input/${codeSectionType}/without-language.md`))
 			).toEqual(await read(`expected/${codeSectionType}/with-language.html`))
@@ -39,7 +38,7 @@ describe('code highlighting', () => {
 			expect(markdownit()
 				.use(markdownItPrism, {
 					defaultLanguage: 'java',
-					...options
+					...options,
 				})
 				.render(await read(`input/${codeSectionType}/without-language.md`))
 			).toEqual(await read(`expected/${codeSectionType}/with-language.html`))
@@ -70,7 +69,7 @@ describe('code highlighting', () => {
 			expect(markdownit()
 				.use(markdownItPrism, {
 					defaultLanguageForUnknown: 'java',
-					...options
+					...options,
 				})
 				.render(await read(`input/${codeSectionType}/with-unknown-language.md`))
 			).toEqual(await read(`expected/${codeSectionType}/with-language.html`))
@@ -80,7 +79,7 @@ describe('code highlighting', () => {
 			expect(markdownit()
 				.use(markdownItPrism, {
 					defaultLanguage: 'java',
-					...options
+					...options,
 				})
 				.render(await read(`input/${codeSectionType}/with-unknown-language.md`))
 			).toEqual(await read(`expected/${codeSectionType}/with-language.html`))
