@@ -44,6 +44,9 @@
   "dependencies": {
     "prismjs": "1.30.0"
   },
+  "peerDependencies": {
+    "markdown-it": ">=7.0.1 <14.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "7.28.3",
     "@babel/core": "7.28.5",
