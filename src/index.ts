@@ -1,9 +1,6 @@
 import Prism, { Grammar } from 'prismjs'
 import loadLanguages from 'prismjs/components/'
-import MarkdownIt from 'markdown-it'
-import Renderer, { RenderRule } from 'markdown-it/lib/renderer'
-import StateCore from 'markdown-it/lib/rules_core/state_core'
-import Token from 'markdown-it/lib/token'
+import MarkdownIt, { Renderer, StateCore, Token } from 'markdown-it'
 
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
 type SelectedPrismLanguage = [string, Grammar | undefined]
@@ -196,7 +193,7 @@ function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingTok
  * @param existingRule
  *        The previously configured render rule for fenced code blocks.
  */
-function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
+function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingRule: Renderer.RenderRule): Renderer.RenderRule {
 	return (tokens, idx, renderOptions, env, self) => {
 		const fenceToken = tokens[idx]
 		const info = fenceToken.info ? markdownit.utils.unescapeAll(fenceToken.info).trim() : ''
@@ -229,7 +226,7 @@ function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingR
  * @param existingRule
  *        The previously configured render rule for inline code.
  */
-function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
+function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: Renderer.RenderRule): Renderer.RenderRule {
 	return (tokens, idx, renderOptions, env, self) => {
 		const inlineCodeToken = tokens[idx]
 		const specifiedLanguage = inlineCodeToken.meta ? (inlineCodeToken.meta[SPECIFIED_LANGUAGE_META_KEY] || '') : ''
