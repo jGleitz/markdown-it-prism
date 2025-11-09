@@ -2,7 +2,7 @@ import markdownit from 'markdown-it'
 // @ts-ignore markdown-it-attrs has no types, and it’s not worth the effort adding a *.d.ts file
 import markdownItAttrs from 'markdown-it-attrs'
 import markdownItPrism from '../src'
-import {read} from './util'
+import { read } from './util'
 
 describe('plugin support', () => {
 	afterEach(() => jest.resetModules())
@@ -10,14 +10,14 @@ describe('plugin support', () => {
 	it('allows to use markdown-it-attrs (attrs loaded first)', async () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
-			.use(markdownItPrism, {highlightInlineCode: true})
+			.use(markdownItPrism, { highlightInlineCode: true })
 			.render(await read('input/all-with-attrs.md'))
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
 	it('allows to use markdown-it-attrs (attrs loaded second)', async () => {
 		expect(markdownit()
-			.use(markdownItPrism, {highlightInlineCode: true})
+			.use(markdownItPrism, { highlightInlineCode: true })
 			.use(markdownItAttrs)
 			.render(await read('input/all-with-attrs.md'))
 		).toEqual(await read('expected/all-with-attrs.html'))
@@ -29,8 +29,8 @@ describe('plugin support', () => {
 				highlightInlineCode: true,
 				plugins: [
 					'highlight-keywords',
-					'show-language'
-				]
+					'show-language',
+				],
 			})
 			.render(await read('input/all-with-language.md'))
 		).toEqual(await read('expected/all-with-language-and-plugins.html'))

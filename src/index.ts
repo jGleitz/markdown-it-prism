@@ -1,7 +1,7 @@
-import Prism, {Grammar} from 'prismjs'
+import Prism, { Grammar } from 'prismjs'
 import loadLanguages from 'prismjs/components/'
 import MarkdownIt from 'markdown-it'
-import Renderer, {RenderRule} from 'markdown-it/lib/renderer'
+import Renderer, { RenderRule } from 'markdown-it/lib/renderer'
 import StateCore from 'markdown-it/lib/rules_core/state_core'
 import Token from 'markdown-it/lib/token'
 
@@ -45,9 +45,8 @@ const DEFAULTS: Options = {
 	},
 	defaultLanguageForUnknown: undefined,
 	defaultLanguageForUnspecified: undefined,
-	defaultLanguage: undefined
+	defaultLanguage: undefined,
 }
-
 
 /**
  * Loads the provided `lang` into prism.
@@ -74,12 +73,12 @@ function loadPrismLang(lang: string): Grammar | undefined {
  */
 function loadPrismPlugin(name: string): void {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require(`prismjs/plugins/${name}/prism-${name}`)
-	} catch (e) {
-		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`)
+	} catch (cause) {
+		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`, { cause })
 	}
 }
-
 
 /**
  * Select the language to use for highlighting, based on the provided options and the specified language.
@@ -152,7 +151,6 @@ function languageClass(markdownit: MarkdownIt, lang: string): string {
 	return markdownit.options.langPrefix + lang
 }
 
-
 /**
  * A {@link RuleCore} that searches for and extracts language specifications on inline code tokens.
  */
@@ -180,7 +178,7 @@ function inlineCodeLanguageRule(state: StateCore) {
 function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingToken: Token) {
 	const languageSpecificationMatch = followingToken.content.match(/^\{((?:[^\s}]+\s)*)language=([^\s}]+)((?:\s[^\s}]+)*)}/)
 	if (languageSpecificationMatch !== null) {
-		inlineCodeToken.meta = {...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: languageSpecificationMatch[2]}
+		inlineCodeToken.meta = { ...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: languageSpecificationMatch[2] }
 		followingToken.content = followingToken.content.slice(languageSpecificationMatch[0].length)
 		if (languageSpecificationMatch[1] || languageSpecificationMatch[3]) {
 			followingToken.content = `{${languageSpecificationMatch[1] || ''}${(languageSpecificationMatch[3] || ' ').slice(1)}}${followingToken.content}`
@@ -213,7 +211,8 @@ function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingR
 			return existingResult.replace(
 				/<((?:pre|code)[^>]*?)(?:\s+class="([^"]*)"([^>]*))?>/g,
 				(match, tagStart, existingClasses?: string, tagEnd?) =>
-					existingClasses?.includes(langClass) ? match
+					existingClasses?.includes(langClass)
+						? match
 						: `<${tagStart} class="${existingClasses ? `${existingClasses} ` : ''}${langClass}"${tagEnd || ''}>`
 			)
 		}
