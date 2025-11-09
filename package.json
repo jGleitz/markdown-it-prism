@@ -1,6 +1,5 @@
 {
   "name": "markdown-it-prism",
-  "version": "3.0.0",
   "description": "Highlights code blocks in markdown-it using Prism.",
   "keywords": [
     "markdown-it",
@@ -18,7 +17,6 @@
   "files": [
     "README.md",
     "LICENSE",
-    "CHANGELOG.md",
     "build/index.js",
     "build/index.d.ts"
   ],
@@ -51,8 +49,6 @@
     "@babel/preset-env": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@babel/register": "7.28.3",
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/git": "10.0.1",
     "@types/jest": "29.5.14",
     "@types/markdown-it": "12.2.3",
     "@types/node": "24.10.0",
@@ -65,7 +61,7 @@
     "markdown-it": "13.0.2",
     "markdown-it-attrs": "4.3.1",
     "npm-run-all2": "8.0.4",
-    "semantic-release": "24.2.9",
+    "semantic-release": "25.0.2",
     "typescript": "5.9.3"
   },
   "packageManager": "npm@11.6.2"
