@@ -2,6 +2,7 @@ import markdownit from 'markdown-it'
 
 import markdownItPrism from '../src'
 import { read } from './util'
+import loadLanguages from 'prismjs/components/index'
 
 const codeSectionTypeSettings = {
 	fenced: {},
@@ -9,6 +10,10 @@ const codeSectionTypeSettings = {
 }
 
 describe('code highlighting', () => {
+	beforeAll(() => {
+		loadLanguages.silent = true
+	})
+
 	Object.entries(codeSectionTypeSettings).forEach(([codeSectionType, options]) => describe(`${codeSectionType} code`, () => {
 		it('highlights code with a language specification using Prism', async () => {
 			expect(markdownit()
