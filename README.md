@@ -1,4 +1,4 @@
-# markdown-it-prism [![Build Status](https://travis-ci.org/jGleitz/markdown-it-prism.svg?branch=master)](https://travis-ci.org/jGleitz/markdown-it-prism) [![npm version](https://badge.fury.io/js/markdown-it-prism.svg)](https://badge.fury.io/js/markdown-it-prism) [![Bower version](https://badge.fury.io/bo/markdown-it-prism.svg)](https://badge.fury.io/bo/markdown-it-prism)
+# markdown-it-prism [![CI](https://github.com/jGleitz/markdown-it-prism/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jGleitz/markdown-it-prism/actions/workflows/ci.yml?query=branch%3Amain) [![NPM Version](https://img.shields.io/npm/v/markdown-it-prism?logo=npm&logoColor=%23DDD)](https://www.npmjs.com/package/markdown-it-prism)
 
 > [markdown-it](https://github.com/markdown-it/markdown-it) plugin to highlight code blocks using [Prism](http://prismjs.com/)
 
