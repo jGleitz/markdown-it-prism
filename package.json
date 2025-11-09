@@ -54,23 +54,23 @@
     "@babel/preset-env": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@babel/register": "7.28.3",
-    "@eslint/js": "^9.39.1",
-    "@eslint/json": "^0.14.0",
-    "@stylistic/eslint-plugin": "^5.5.0",
+    "@eslint/js": "9.39.1",
+    "@eslint/json": "0.14.0",
+    "@stylistic/eslint-plugin": "5.5.0",
     "@types/jest": "30.0.0",
     "@types/markdown-it": "14.1.2",
     "@types/node": "24.10.0",
     "@types/prismjs": "1.26.5",
     "babel-plugin-add-module-exports": "1.0.4",
     "eslint": "9.39.1",
-    "eslint-plugin-yml": "^1.19.0",
+    "eslint-plugin-yml": "1.19.0",
     "jest": "30.2.0",
     "markdown-it": "14.1.0",
     "markdown-it-attrs": "4.3.1",
     "npm-run-all2": "8.0.4",
     "semantic-release": "25.0.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.46.3"
+    "typescript-eslint": "8.46.3"
   },
   "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }
