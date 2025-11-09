@@ -28,13 +28,13 @@ importers:
         specifier: 7.28.3
         version: 7.28.3(@babel/core@7.28.5)
       '@eslint/js':
-        specifier: ^9.39.1
+        specifier: 9.39.1
         version: 9.39.1
       '@eslint/json':
-        specifier: ^0.14.0
+        specifier: 0.14.0
         version: 0.14.0
       '@stylistic/eslint-plugin':
-        specifier: ^5.5.0
+        specifier: 5.5.0
         version: 5.5.0(eslint@9.39.1)
       '@types/jest':
         specifier: 30.0.0
@@ -55,7 +55,7 @@ importers:
         specifier: 9.39.1
         version: 9.39.1
       eslint-plugin-yml:
-        specifier: ^1.19.0
+        specifier: 1.19.0
         version: 1.19.0(eslint@9.39.1)
       jest:
         specifier: 30.2.0
@@ -76,7 +76,7 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.46.3
+        specifier: 8.46.3
         version: 8.46.3(eslint@9.39.1)(typescript@5.9.3)
 
 packages:
