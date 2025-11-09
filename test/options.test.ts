@@ -1,7 +1,12 @@
 import markdownit from 'markdown-it'
 import markdownItPrism from '../src'
+import loadLanguages from 'prismjs/components/index'
 
 describe('option handling', () => {
+	beforeAll(() => {
+		loadLanguages.silent = true
+	})
+
 	it('throws for unknown plugins', () => {
 		expect(() => markdownit()
 			.use(markdownItPrism, {
