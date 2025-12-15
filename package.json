@@ -54,7 +54,7 @@
     "@babel/preset-env": "7.28.5",
     "@babel/preset-typescript": "7.28.5",
     "@babel/register": "7.28.3",
-    "@eslint/js": "9.39.1",
+    "@eslint/js": "9.39.2",
     "@eslint/json": "0.14.0",
     "@stylistic/eslint-plugin": "5.6.1",
     "@types/jest": "30.0.0",
