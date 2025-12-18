@@ -55,8 +55,8 @@ importers:
         specifier: 9.39.2
         version: 9.39.2
       eslint-plugin-yml:
-        specifier: 1.19.0
-        version: 1.19.0(eslint@9.39.2)
+        specifier: 1.19.1
+        version: 1.19.1(eslint@9.39.2)
       jest:
         specifier: 30.2.0
         version: 30.2.0(@types/node@24.10.4)
@@ -1652,8 +1652,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  eslint-plugin-yml@1.19.0:
-    resolution: {integrity: sha512-S+4GbcCWksFKAvFJtf0vpdiCkZZvDJCV4Zsi9ahmYkYOYcf+LRqqzvzkb/ST7vTYV6sFwXOvawzYyL/jFT2nQA==}
+  eslint-plugin-yml@1.19.1:
+    resolution: {integrity: sha512-bYkOxyEiXh9WxUhVYPELdSHxGG5pOjCSeJOVkfdIyj6tuiHDxrES2WAW1dBxn3iaZQey57XflwLtCYRcNPOiOg==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
@@ -5246,7 +5246,7 @@ snapshots:
       eslint: 9.39.2
       semver: 7.7.3
 
-  eslint-plugin-yml@1.19.0(eslint@9.39.2):
+  eslint-plugin-yml@1.19.1(eslint@9.39.2):
     dependencies:
       debug: 4.4.3
       diff-sequences: 27.5.1
