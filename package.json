@@ -59,7 +59,7 @@
     "@stylistic/eslint-plugin": "5.7.0",
     "@types/jest": "30.0.0",
     "@types/markdown-it": "14.1.2",
-    "@types/node": "24.10.8",
+    "@types/node": "24.10.9",
     "@types/prismjs": "1.26.5",
     "babel-plugin-add-module-exports": "1.0.4",
     "eslint": "9.39.2",
