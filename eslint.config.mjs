@@ -7,7 +7,7 @@ import stylistic from '@stylistic/eslint-plugin'
 export default defineConfig(
 	eslint.configs.recommended,
 	tseslint.configs.recommended,
-	ymleslint.configs['flat/recommended'],
+	...ymleslint.configs.recommended,
 	stylistic.configs.customize({
 		indent: 'tab',
 		quotes: 'single',
