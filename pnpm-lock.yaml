@@ -55,8 +55,8 @@ importers:
         specifier: 10.0.1
         version: 10.0.1
       eslint-plugin-yml:
-        specifier: 3.2.1
-        version: 3.2.1(eslint@10.0.1)
+        specifier: 3.2.2
+        version: 3.2.2(eslint@10.0.1)
       jest:
         specifier: 30.2.0
         version: 30.2.0(@types/node@24.10.13)
@@ -937,8 +937,8 @@ packages:
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
 
-  '@ota-meshi/ast-token-store@0.2.3':
-    resolution: {integrity: sha512-Jgp8rBprSMIDY0IuokbESFozd5SSa/LZsQ9/xiNooDdiy+WK2LlA51f+GjgBKq8CE4YpfK5kdBjNtbwlThApoQ==}
+  '@ota-meshi/ast-token-store@0.3.0':
+    resolution: {integrity: sha512-XRO0zi2NIUKq2lUk3T1ecFSld1fMWRKE6naRFGkgkdeosx7IslyUKNv5Dcb5PJTja9tHJoFu0v/7yEpAkrkrTg==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@pkgjs/parseargs@0.11.0':
@@ -1671,8 +1671,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-yml@3.2.1:
-    resolution: {integrity: sha512-/oFj7MWk56AKLelLSUb7zN1OKDI9kR+uKEzbf/sGu7Bov0tJs3qwtMcu+VCcEtFAFD7KZe0LSYhyy0Uq8hKF9g==}
+  eslint-plugin-yml@3.2.2:
+    resolution: {integrity: sha512-vMluBBMGecygLzeOly0EnDhudQb9CNEXEUokTap93oF/KyASAADed4xRlFBQQNuzJK3N6u5s3M/IjIKPGZZOKA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: '>=9.38.0'
@@ -4507,7 +4507,7 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 27.0.0
 
-  '@ota-meshi/ast-token-store@0.2.3': {}
+  '@ota-meshi/ast-token-store@0.3.0': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -5267,11 +5267,11 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-yml@3.2.1(eslint@10.0.1):
+  eslint-plugin-yml@3.2.2(eslint@10.0.1):
     dependencies:
       '@eslint/core': 1.1.0
       '@eslint/plugin-kit': 0.6.0
-      '@ota-meshi/ast-token-store': 0.2.3
+      '@ota-meshi/ast-token-store': 0.3.0
       debug: 4.4.3
       diff-sequences: 29.6.3
       escape-string-regexp: 5.0.0
