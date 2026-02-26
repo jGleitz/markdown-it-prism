@@ -55,8 +55,8 @@ importers:
         specifier: 10.0.1
         version: 10.0.1
       eslint-plugin-yml:
-        specifier: 3.2.2
-        version: 3.2.2(eslint@10.0.1)
+        specifier: 3.3.0
+        version: 3.3.0(eslint@10.0.1)
       jest:
         specifier: 30.2.0
         version: 30.2.0(@types/node@24.10.13)
@@ -1671,8 +1671,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-yml@3.2.2:
-    resolution: {integrity: sha512-vMluBBMGecygLzeOly0EnDhudQb9CNEXEUokTap93oF/KyASAADed4xRlFBQQNuzJK3N6u5s3M/IjIKPGZZOKA==}
+  eslint-plugin-yml@3.3.0:
+    resolution: {integrity: sha512-kRja5paNrMfZnbNqDbZSFrSHz5x7jmGBQq7d6z/+wRvWD4Y0yb1fbjojBg3ReMewFhBB7nD2nPC86+m3HmILJA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: '>=9.38.0'
@@ -5267,7 +5267,7 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-yml@3.2.2(eslint@10.0.1):
+  eslint-plugin-yml@3.3.0(eslint@10.0.1):
     dependencies:
       '@eslint/core': 1.1.0
       '@eslint/plugin-kit': 0.6.0
