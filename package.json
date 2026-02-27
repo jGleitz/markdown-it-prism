@@ -62,7 +62,7 @@
     "@types/node": "24.10.13",
     "@types/prismjs": "1.26.6",
     "babel-plugin-add-module-exports": "1.0.4",
-    "eslint": "10.0.1",
+    "eslint": "10.0.2",
     "eslint-plugin-yml": "3.3.0",
     "jest": "30.2.0",
     "markdown-it": "14.1.1",
