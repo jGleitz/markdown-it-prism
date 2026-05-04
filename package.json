@@ -51,9 +51,9 @@
   "devDependencies": {
     "@babel/cli": "7.28.6",
     "@babel/core": "7.29.0",
-    "@babel/preset-env": "7.29.2",
+    "@babel/preset-env": "7.29.3",
     "@babel/preset-typescript": "7.28.5",
-    "@babel/register": "7.28.6",
+    "@babel/register": "7.29.3",
     "@eslint/js": "10.0.1",
     "@eslint/json": "1.2.0",
     "@stylistic/eslint-plugin": "5.10.0",
