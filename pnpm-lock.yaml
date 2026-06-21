@@ -61,11 +61,11 @@ importers:
         specifier: 30.4.0
         version: 30.4.0(@types/node@24.12.3)
       markdown-it:
-        specifier: 14.1.1
-        version: 14.1.1
+        specifier: 14.2.0
+        version: 14.2.0
       markdown-it-attrs:
         specifier: 4.3.1
-        version: 4.3.1(markdown-it@14.1.1)
+        version: 4.3.1(markdown-it@14.2.0)
       npm-run-all2:
         specifier: 8.0.4
         version: 8.0.4
@@ -2386,8 +2386,8 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  linkify-it@5.0.0:
-    resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
+  linkify-it@5.0.1:
+    resolution: {integrity: sha512-wVoTjP4Q6R0NW5hiZkVJaFZPWgtXfoGF+6LucL3/FtiNjmcHhYjEr5f1Kqjirc1nBW07J/ZuRFumqr2oqccEWg==}
 
   load-json-file@4.0.0:
     resolution: {integrity: sha512-Kx8hMakjX03tiGTLAIdJ+lL0htKnXjEZN6hk/tozf/WOuYGdZBJrZ+rCJRbVCugsjB3jMLn9746NsQIf5VjBMw==}
@@ -2461,8 +2461,8 @@ packages:
     peerDependencies:
       markdown-it: '>= 9.0.0'
 
-  markdown-it@14.1.1:
-    resolution: {integrity: sha512-BuU2qnTti9YKgK5N+IeMubp14ZUKUUw7yeJbkjtosvHiP0AZ5c8IAgEMk79D0eC8F23r4Ac/q8cAIFdm2FtyoA==}
+  markdown-it@14.2.0:
+    resolution: {integrity: sha512-1TGiQiJVRQ3NPmZH6sx5Cfnmg6GQm9jvC1ch4TK511NjSJvjzKLzn5pPfZRNZkRPZP0HqCioSndqH8v2nRaWVQ==}
     hasBin: true
 
   marked-terminal@7.3.0:
@@ -6284,7 +6284,7 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  linkify-it@5.0.0:
+  linkify-it@5.0.1:
     dependencies:
       uc.micro: 2.1.0
 
@@ -6354,15 +6354,15 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  markdown-it-attrs@4.3.1(markdown-it@14.1.1):
+  markdown-it-attrs@4.3.1(markdown-it@14.2.0):
     dependencies:
-      markdown-it: 14.1.1
+      markdown-it: 14.2.0
 
-  markdown-it@14.1.1:
+  markdown-it@14.2.0:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
-      linkify-it: 5.0.0
+      linkify-it: 5.0.1
       mdurl: 2.0.0
       punycode.js: 2.3.1
       uc.micro: 2.1.0
