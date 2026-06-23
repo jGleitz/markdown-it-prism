@@ -67,7 +67,7 @@
     "jest": "30.4.2",
     "markdown-it": "14.2.0",
     "markdown-it-attrs": "4.5.0",
-    "npm-run-all2": "8.0.4",
+    "npm-run-all2": "9.0.2",
     "semantic-release": "25.0.5",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.2"
