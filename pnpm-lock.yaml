@@ -64,8 +64,8 @@ importers:
         specifier: 14.2.0
         version: 14.2.0
       markdown-it-attrs:
-        specifier: 4.3.1
-        version: 4.3.1(markdown-it@14.2.0)
+        specifier: 4.5.0
+        version: 4.5.0(markdown-it@14.2.0)
       npm-run-all2:
         specifier: 8.0.4
         version: 8.0.4
@@ -2508,8 +2508,8 @@ packages:
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
 
-  markdown-it-attrs@4.3.1:
-    resolution: {integrity: sha512-/ko6cba+H6gdZ0DOw7BbNMZtfuJTRp9g/IrGIuz8lYc/EfnmWRpaR3CFPnNbVz0LDvF8Gf1hFGPqrQqq7De0rg==}
+  markdown-it-attrs@4.5.0:
+    resolution: {integrity: sha512-dsuEyK/MDAYsdZLDIaDAQXz5+gP0AAbJ4ZjOSB0w+ZGe4lLbzyCgGg0LApC6j9zUK2F+2SA9VkzXfyNG9hL/8g==}
     engines: {node: '>=6'}
     peerDependencies:
       markdown-it: '>= 9.0.0'
@@ -6410,7 +6410,7 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  markdown-it-attrs@4.3.1(markdown-it@14.2.0):
+  markdown-it-attrs@4.5.0(markdown-it@14.2.0):
     dependencies:
       markdown-it: 14.2.0
 
