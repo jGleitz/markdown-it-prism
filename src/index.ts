@@ -178,7 +178,7 @@ function infoSeparator(rest: string): string {
 	if (rest === '') {
 		return ''
 	}
-	if (rest.match(/^\s/)) {
+	if (/^\s/.test(rest)) {
 		return ''
 	}
 	return ' '
