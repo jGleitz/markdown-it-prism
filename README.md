@@ -40,6 +40,10 @@ This syntax is compatible with [markdown-it-attrs](https://github.com/arve0/mark
 The `language=<x>` part will be stripped, but everything else between `{` and `}` will work
 with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) as usual.
 
+For fenced code blocks, attribute support through [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs)
+requires `markdown-it-attrs` v5.0.0 or later. With v5+, the order in which the two plugins are loaded no longer
+affects the output.
+
 ## Usage with Webpack
 
 If you want to use this plugin together with [Webpack](https://webpack.js.org/), you need to import all languages you intend to use:
