@@ -70,6 +70,18 @@ describe('code highlighting', () => {
 			).toEqual(await read(`expected/${codeSectionType}/with-html-in-language.html`))
 		})
 
+		if (codeSectionType === 'fenced') {
+			it('preserves special language names when defaultLanguageForUnspecified is configured', async () => {
+				expect(markdownit()
+					.use(markdownItPrism, {
+						defaultLanguageForUnspecified: 'java',
+						...options,
+					})
+					.render(await read('input/fenced/with-html-in-language.md'))
+				).toEqual(await read('expected/fenced/with-html-in-language.html'))
+			})
+		}
+
 		it('falls back to defaultLanguageForUnknown if the specified language is unknown', async () => {
 			expect(markdownit()
 				.use(markdownItPrism, {

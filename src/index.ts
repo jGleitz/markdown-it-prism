@@ -149,7 +149,7 @@ function resolveFenceLanguageRule(markdownit: MarkdownIt, options: Options): Mar
 			if (token.type === 'fence') {
 				const trimmedInfo = markdownit.utils.unescapeAll(token.info).trim()
 				const firstToken = trimmedInfo.split(/(\s+)/g)[0]
-				const isAttributeOnly = firstToken.startsWith('.') || /[{}=]/.test(firstToken)
+				const isAttributeOnly = firstToken.startsWith('.') || firstToken.startsWith('{')
 				const lang = isAttributeOnly ? '' : firstToken
 				const rest = isAttributeOnly ? trimmedInfo : trimmedInfo.slice(lang.length)
 				const [langToUse] = selectLanguage(options, lang)
@@ -272,7 +272,13 @@ export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Opt
 
 	// register ourselves as highlighter
 	markdownit.options.highlight = (text, lang) => highlight(markdownit, options, text, lang)
-	markdownit.core.ruler.after('linkify', 'prism_resolve_fence_language', resolveFenceLanguageRule(markdownit, options))
+	const resolveFenceLanguage = resolveFenceLanguageRule(markdownit, options)
+	const coreRuler = markdownit.core.ruler as MarkdownIt.Ruler<MarkdownIt.Core.RuleCore> & { __rules__: Array<{ name: string }> }
+	if (coreRuler.__rules__.some(rule => rule.name === 'linkify')) {
+		markdownit.core.ruler.after('linkify', 'prism_resolve_fence_language', resolveFenceLanguage)
+	} else {
+		markdownit.core.ruler.push('prism_resolve_fence_language', resolveFenceLanguage)
+	}
 	if (options.highlightInlineCode) {
 		markdownit.core.ruler.after('inline', 'prism_inline_code_language', inlineCodeLanguageRule)
 		markdownit.renderer.rules.code_inline = renderInlineCode(markdownit, options, markdownit.renderer.rules.code_inline || renderFallback)

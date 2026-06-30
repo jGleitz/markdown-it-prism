@@ -59,4 +59,11 @@ describe('plugin support', () => {
 			.render(await read('input/all-with-language.md'))
 		).toEqual(await read('expected/all-with-language-and-plugins.html'))
 	})
+
+	it('loads with the commonmark preset', () => {
+		expect(() => markdownit('commonmark')
+			.use(markdownItPrism)
+			.render('```js\nconst value = 1\n```')
+		).not.toThrow()
+	})
 })
