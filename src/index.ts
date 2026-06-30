@@ -149,7 +149,7 @@ function resolveFenceLanguageRule(markdownit: MarkdownIt, options: Options): Mar
 			if (token.type === 'fence') {
 				const trimmedInfo = markdownit.utils.unescapeAll(token.info).trim()
 				const firstToken = trimmedInfo.split(/(\s+)/g)[0]
-				const isAttributeOnly = firstToken.startsWith('.') || firstToken.startsWith('{')
+				const isAttributeOnly = firstToken.startsWith('{')
 				const lang = isAttributeOnly ? '' : firstToken
 				const rest = isAttributeOnly ? trimmedInfo : trimmedInfo.slice(lang.length)
 				const [langToUse] = selectLanguage(options, lang)

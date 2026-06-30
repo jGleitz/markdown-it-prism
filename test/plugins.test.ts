@@ -60,10 +60,10 @@ describe('plugin support', () => {
 		).toEqual(await read('expected/all-with-language-and-plugins.html'))
 	})
 
-	it('loads with the commonmark preset', () => {
-		expect(() => markdownit('commonmark')
+	it('loads with the commonmark preset and renders fenced code', async () => {
+		expect(markdownit('commonmark')
 			.use(markdownItPrism)
 			.render('```js\nconst value = 1\n```')
-		).not.toThrow()
+		).toEqual('<pre><code class="language-js"><span class="token keyword keyword-const">const</span> value <span class="token operator">=</span> <span class="token number">1</span>\n</code></pre>\n')
 	})
 })
