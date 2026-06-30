@@ -58,4 +58,5 @@
 ## 2026-06-30T SonarQube PR #1121 follow-up
 - Split fence language resolution into `resolveFenceInfo`, `joinResolvedInfo`, and `infoSeparator` so `resolveFenceLanguageRule` only owns the token loop and fence branch.
 - Preserved brace-prefixed `{...}` attribute-only semantics and the original separator behavior while removing the nested ternary.
-- Evidence saved at .omo/evidence/sonarqube-fixes.md; `pnpm test` passed with 3 suites and 34 tests.
+- After rebasing onto the remote TypeScript v6 update, restored root `tsconfig.json` to Node/CommonJS module resolution because bundler resolution broke existing `markdown-it` typings before tests could run.
+- Evidence saved at .omo/evidence/sonarqube-fixes.md; final post-rebase `pnpm test` passed with 3 suites and 34 tests.

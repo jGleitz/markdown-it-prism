@@ -15,12 +15,17 @@ Branch: `feat/markdown-it-attrs-v5-compat`
   - `resolveFenceInfo(...)` preserves existing unescape/trim, first-token split, brace-prefixed attribute-only detection, and `selectLanguage(...)` behavior.
   - `joinResolvedInfo(...)` returns `undefined` when no `token.info` rewrite is needed.
   - `infoSeparator(...)` preserves the original separator rules without a nested ternary.
+- `tsconfig.json`
+  - After rebasing onto the updated remote branch, TypeScript v6 failed before running tests because `moduleResolution: "bundler"` was paired with `module: "commonjs"`.
+  - Restored Node/CommonJS module resolution to match the existing `markdown-it` import style and make the rebased branch testable.
 
 ## Verification
 
 Command: `pnpm test`
 
 Result: passed
+
+Note: `pnpm test` was run once before rebasing and once again after rebasing onto the updated remote branch and fixing the TypeScript v6 config issue. The final post-rebase run passed.
 
 ```text
 > markdown-it-prism@ test /home/josh/Projekte/markdown-it-prism
