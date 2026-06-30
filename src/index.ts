@@ -147,20 +147,41 @@ function resolveFenceLanguageRule(markdownit: MarkdownIt, options: Options): Mar
 	return (state) => {
 		for (const token of state.tokens) {
 			if (token.type === 'fence') {
-				const trimmedInfo = markdownit.utils.unescapeAll(token.info).trim()
-				const firstToken = trimmedInfo.split(/(\s+)/g)[0]
-				const isAttributeOnly = firstToken.startsWith('{')
-				const lang = isAttributeOnly ? '' : firstToken
-				const rest = isAttributeOnly ? trimmedInfo : trimmedInfo.slice(lang.length)
-				const [langToUse] = selectLanguage(options, lang)
-
-				if (langToUse !== '' && langToUse !== lang) {
-					const separator = rest === '' ? '' : (rest.match(/^\s/) ? '' : ' ')
-					token.info = langToUse + separator + rest
+				const resolvedInfo = resolveFenceInfo(markdownit, token.info, options)
+				if (resolvedInfo !== undefined) {
+					token.info = resolvedInfo
 				}
 			}
 		}
 	}
+}
+
+function resolveFenceInfo(markdownit: MarkdownIt, info: string, options: Options): string | undefined {
+	const trimmedInfo = markdownit.utils.unescapeAll(info).trim()
+	const firstToken = trimmedInfo.split(/(\s+)/g)[0]
+	const isAttributeOnly = firstToken.startsWith('{')
+	const originalLang = isAttributeOnly ? '' : firstToken
+	const rest = isAttributeOnly ? trimmedInfo : trimmedInfo.slice(originalLang.length)
+	const [langToUse] = selectLanguage(options, originalLang)
+
+	return joinResolvedInfo(langToUse, originalLang, rest)
+}
+
+function joinResolvedInfo(langToUse: string, originalLang: string, rest: string): string | undefined {
+	if (langToUse === '' || langToUse === originalLang) {
+		return undefined
+	}
+	return langToUse + infoSeparator(rest) + rest
+}
+
+function infoSeparator(rest: string): string {
+	if (rest === '') {
+		return ''
+	}
+	if (rest.match(/^\s/)) {
+		return ''
+	}
+	return ' '
 }
 
 /**
