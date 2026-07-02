@@ -131,7 +131,8 @@ function createFencedCodeLanguageFallbackRule(options: Options): MarkdownIt.Core
 	return (state) => {
 		for (const token of state.tokens) {
 			if (token.type === 'fence') {
-				const [langToUse] = selectLanguage(options, token.info)
+				// markdown-it trim()s the language specification before setting it on .info, but markdown-it-attrs does not!
+				const [langToUse] = selectLanguage(options, token.info.trim())
 				token.info = langToUse
 			}
 		}
@@ -171,7 +172,7 @@ function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingTok
 		inlineCodeToken.meta = { ...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: specifiedLanguage }
 	} else {
 		// No specified language via already-parsed attributes. Let’s see whether we can find and parse a language specification ourselves
-		const languageSpecificationMatch = /^\{((?:[^\s}]+\s)*)language=\s*([^\s}]+)((?:\s+[^\s}]+)*)\s*}/.exec(followingToken.content)
+		const languageSpecificationMatch = /^\{((?:[^\s}]+\s)*)language=([^\s}]+)((?:\s+[^\s}]+)*)\s*}/.exec(followingToken.content)
 		if (languageSpecificationMatch !== null) {
 			const [fullMatch, attrsBefore, specifiedLanguage, attrsAfter] = languageSpecificationMatch
 			inlineCodeToken.meta = { ...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: specifiedLanguage }

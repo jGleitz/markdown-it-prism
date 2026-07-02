@@ -1,1 +1,1 @@
-`System.out.println("bar")`{language=  	   java   	  }
+`System.out.println("bar")`{language=java   	  }

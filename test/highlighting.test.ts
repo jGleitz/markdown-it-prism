@@ -110,7 +110,7 @@ describe('code highlighting', () => {
 			).toEqual(await read(`expected/${codeSectionType}/cpp.html`))
 		})
 
-		it('tolerates whitespace before and after the language name', async () => {
+		it(`tolerates whitespace ${codeSectionType !== 'inline' ? 'before and ' : ''}after the language name`, async () => {
 			expect(markdownit()
 				.use(markdownItPrism, options)
 				.render(await read(`input/${codeSectionType}/with-whitespace-around-language.md`)),
