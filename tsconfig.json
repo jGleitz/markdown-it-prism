@@ -3,10 +3,7 @@
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "bundler",
-    "types": [
-      "jest",
-      "node"
-    ],
+    "types": ["jest", "node"],
     "allowJs": false,
     "noEmit": true,
     "strict": true,
