@@ -125,6 +125,16 @@ describe('code highlighting', () => {
 		).toEqual(await read('expected/indented.html'))
 	})
 
+	it('does not add classes to indented code blocks, even if defaultLanguageForUnspecified is set', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, {
+				...codeSectionTypeSettings.inline,
+				defaultLanguageForUnspecified: 'java',
+			})
+			.render(await read('input/indented.md')),
+		).toEqual(await read('expected/indented.html'))
+	})
+
 	it('does not highlight inline code unless configured', async () => {
 		expect(markdownit()
 			.use(markdownItPrism, codeSectionTypeSettings.fenced)
