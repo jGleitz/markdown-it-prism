@@ -3,7 +3,6 @@ import loadLanguages from 'prismjs/components/'
 import MarkdownIt, { Renderer, StateCore, Token } from 'markdown-it'
 
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
-type SelectedPrismLanguage = [string, Grammar | undefined]
 
 interface Options {
 	/**
@@ -50,9 +49,10 @@ const DEFAULTS: Options = {
  *
  * @param lang
  *        Code of the language to load.
- * @return The Prism language object for the provided {@code lang} code. {@code undefined} if the language is not known to Prism.
+ * @return The Prism grammar object for the provided {@code lang} code. {@code undefined} if the language is not known
+ * to Prism.
  */
-function loadPrismLang(lang: string): Grammar | undefined {
+function loadPrismGrammar(lang: string): Grammar | undefined {
 	if (!lang) return undefined
 	let langObject = Prism.languages[lang]
 	if (langObject === undefined) {
@@ -91,10 +91,10 @@ function selectLanguage(options: Options, lang: string): [string, Grammar | unde
 	if (langToUse === '' && options.defaultLanguageForUnspecified !== undefined) {
 		langToUse = options.defaultLanguageForUnspecified
 	}
-	let prismLang = loadPrismLang(langToUse)
+	let prismLang = loadPrismGrammar(langToUse)
 	if (prismLang === undefined && options.defaultLanguageForUnknown !== undefined) {
 		langToUse = options.defaultLanguageForUnknown
-		prismLang = loadPrismLang(langToUse)
+		prismLang = loadPrismGrammar(langToUse)
 	}
 	return [langToUse, prismLang]
 }
@@ -107,27 +107,15 @@ function selectLanguage(options: Options, lang: string): [string, Grammar | unde
  * @param text
  *        The text to highlight.
  * @param lang
- *        Code of the language to highlight the text in.
- * @return If Prism knows `lang`, the `text` highlighted for that language. Otherwise, `text` html-escaped.
- */
-function highlight(markdownit: MarkdownIt, text: string, lang: string): string {
-	return highlightWithSelectedLanguage(markdownit, text, [lang, loadPrismLang(lang)])
-}
-
-/**
- * Highlights the provided text using Prism.
+ *        Name of the selected Prism language to use for highlighting.
+ * @param prismGrammar
+ * 		 Prism’s {@link Grammar} for {@link lang} if Prism knows that language. Else `undefined`.
  *
- * @param markdownit
- *        The markdown-it instance.
- * @param text
- *        The text to highlight.
- * @param lang
- *        The selected Prism language to use for highlighting.
- * @return If Prism knows the language that {@link selectLanguage} returns for `lang`, the `text` highlighted for that language. Otherwise, `text`
- *  html-escaped.
+ * @return If {@link prismGrammar} `!== undefined` (i.e. Prism knows {@link lang}), the {@link text} highlighted for
+ * that language. Otherwise, {@link text} html-escaped.
  */
-function highlightWithSelectedLanguage(markdownit: MarkdownIt, text: string, [langToUse, prismLang]: SelectedPrismLanguage): string {
-	return prismLang ? Prism.highlight(text, prismLang, langToUse) : markdownit.utils.escapeHtml(text)
+function highlight(markdownit: MarkdownIt, text: string, lang: string, prismGrammar: Grammar | undefined): string {
+	return prismGrammar ? Prism.highlight(text, prismGrammar, lang) : markdownit.utils.escapeHtml(text)
 }
 
 /**
@@ -209,9 +197,9 @@ function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule
 	return (tokens, idx, renderOptions, env, self) => {
 		const inlineCodeToken = tokens[idx]
 		const specifiedLanguage = inlineCodeToken.meta ? (inlineCodeToken.meta[SPECIFIED_LANGUAGE_META_KEY] || '') : ''
-		const [langToUse, prismLang] = selectLanguage(options, specifiedLanguage)
+		const [langToUse, prismGrammar] = selectLanguage(options, specifiedLanguage)
 		if (langToUse) {
-			const highlighted = highlightWithSelectedLanguage(markdownit, inlineCodeToken.content, [langToUse, prismLang])
+			const highlighted = highlight(markdownit, inlineCodeToken.content, langToUse, prismGrammar)
 			inlineCodeToken.attrJoin('class', markdownit.options.langPrefix + langToUse)
 			return `<code${self.renderAttrs(inlineCodeToken)}>${highlighted}</code>`
 		} else {
@@ -234,7 +222,7 @@ function checkLanguageOption(
 	optionName: 'defaultLanguage' | 'defaultLanguageForUnknown' | 'defaultLanguageForUnspecified',
 ): void {
 	const language = options[optionName]
-	if (language !== undefined && loadPrismLang(language) === undefined) {
+	if (language !== undefined && loadPrismGrammar(language) === undefined) {
 		throw new Error(`Bad option ${optionName}: There is no Prism language '${language}'.`)
 	}
 }
@@ -251,7 +239,7 @@ function renderFallback(tokens: Token[], idx: number, options: MarkdownIt.Option
  * to MarkdownIt’s {@link MarkdownIt.use} function.
  *
  * @param markdownit
- *        The markdown it instance the plugin is being registered to.
+ *        The markdown-it instance the plugin is being registered to.
  * @param useroptions
  *        The options this plugin is being initialised with.
  */
@@ -268,7 +256,7 @@ export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Opt
 	options.init(Prism)
 
 	// register ourselves as highlighter
-	markdownit.options.highlight = (text, lang) => highlight(markdownit, text, lang)
+	markdownit.options.highlight = (text, lang) => highlight(markdownit, text, lang, loadPrismGrammar(lang))
 	markdownit.core.ruler.push('prism_language_fallback', createFencedCodeLanguageFallbackRule(options))
 	if (options.highlightInlineCode) {
 		markdownit.core.ruler.push('prism_inline_code_language', inlineCodeLanguageRule)
