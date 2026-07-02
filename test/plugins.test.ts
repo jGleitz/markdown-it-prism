@@ -1,5 +1,4 @@
 import markdownit from 'markdown-it'
-// @ts-ignore markdown-it-attrs has no types, and it’s not worth the effort adding a *.d.ts file
 import markdownItAttrs from 'markdown-it-attrs'
 import markdownItPrism from '../src'
 import { read } from './util'
@@ -7,7 +6,7 @@ import { read } from './util'
 describe('plugin support', () => {
 	afterEach(() => jest.resetModules())
 
-	it('allows to use markdown-it-attrs (attrs loaded first)', async () => {
+	it('is compatible with markdown-it-attrs (attrs loaded first)', async () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
 			.use(markdownItPrism, { highlightInlineCode: true })
@@ -15,7 +14,7 @@ describe('plugin support', () => {
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
-	it('allows to use markdown-it-attrs (attrs loaded second)', async () => {
+	it('is compatible with markdown-it-attrs (prism loaded first)', async () => {
 		expect(markdownit()
 			.use(markdownItPrism, { highlightInlineCode: true })
 			.use(markdownItAttrs)
@@ -23,7 +22,59 @@ describe('plugin support', () => {
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
-	it('allows to use Prism plugins', async () => {
+	it('is compatible with markdown-it-attrs when using custom delimiters (attrs loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/all-with-attrs-custom-delimiters.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
+	it('is compatible with markdown-it-attrs when using custom delimiters (prism loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
+			.render(await read('input/all-with-attrs-custom-delimiters.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
+	it('is compatible with markdown-it-attrs if using allowedAttributes and including `language` (attrs loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItAttrs, {
+				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
+			})
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/all-with-attrs.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
+	it('is compatible with markdown-it-attrs if using allowedAttributes and including `language`  (prism loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs, {
+				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
+			})
+			.render(await read('input/all-with-attrs.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
+	it('highlights a solitaire inline code when markdown-it-attrs is loaded (attrs loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItAttrs)
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/inline/with-language.md'))
+		).toEqual(await read('expected/inline/with-language.html'))
+	})
+
+	it('highlights a solitaire inline code when markdown-it-attrs is loaded (prism loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs)
+			.render(await read('input/inline/with-language.md'))
+		).toEqual(await read('expected/inline/with-language.html'))
+	})
+
+	it('allows using Prism plugins', async () => {
 		expect(markdownit()
 			.use(markdownItPrism, {
 				highlightInlineCode: true,
@@ -34,5 +85,12 @@ describe('plugin support', () => {
 			})
 			.render(await read('input/all-with-language.md'))
 		).toEqual(await read('expected/all-with-language-and-plugins.html'))
+	})
+
+	it('loads with the commonmark preset and renders fenced code', async () => {
+		expect(markdownit('commonmark')
+			.use(markdownItPrism)
+			.render('```js\nconst value = 1\n```')
+		).toEqual('<pre><code class="language-js"><span class="token keyword keyword-const">const</span> value <span class="token operator">=</span> <span class="token number">1</span>\n</code></pre>\n')
 	})
 })

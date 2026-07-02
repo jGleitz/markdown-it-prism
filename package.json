@@ -46,7 +46,13 @@
     "prismjs": "1.30.0"
   },
   "peerDependencies": {
-    "markdown-it": ">=7.0.1 <15.0.0"
+    "markdown-it": ">=7.0.1 <15.0.0",
+    "markdown-it-attrs": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "markdown-it-attrs": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/cli": "8.0.1",
@@ -66,7 +72,7 @@
     "eslint-plugin-yml": "3.5.0",
     "jest": "30.4.2",
     "markdown-it": "14.2.0",
-    "markdown-it-attrs": "4.5.0",
+    "markdown-it-attrs": "5.0.0",
     "npm-run-all2": "9.0.2",
     "semantic-release": "25.0.5",
     "typescript": "6.0.3",

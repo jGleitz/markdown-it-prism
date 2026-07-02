@@ -10,8 +10,19 @@ public class Foo() {
 }
 ```
 
+With more whitespace:
+```  	   java   	   {.classname data-custom=value}
+public class Foo() {
+	public Foo(String bar) {
+		System.out.println(bar);
+	}
+}
+```
+
 Please see: `class Demo { };`{language=cpp .red}, nice, isn’t it?
 
 Also see: `class Demo { };`{.red language=cpp}!
+
+With more whitespace: `class Demo { };`{.red language=cpp   	   lang=en}!
 
 And, finally: `class Demo { };`{foo=bar .red language=cpp lang=en #awesome}. Awesome!

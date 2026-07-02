@@ -1,6 +1,7 @@
 # markdown-it-prism [![CI](https://github.com/jGleitz/markdown-it-prism/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jGleitz/markdown-it-prism/actions/workflows/ci.yml?query=branch%3Amain) [![NPM Version](https://img.shields.io/npm/v/markdown-it-prism?logo=npm&logoColor=%23DDD)](https://www.npmjs.com/package/markdown-it-prism)
 
-> [markdown-it](https://github.com/markdown-it/markdown-it) plugin to highlight code blocks using [Prism](http://prismjs.com/)
+> [markdown-it](https://github.com/markdown-it/markdown-it) plugin to highlight code blocks
+> using [Prism](http://prismjs.com/)
 
 ## Usage
 
@@ -11,7 +12,8 @@ const prism = require('markdown-it-prism');
 md.use(prism, options);
 ```
 
-The plugin will insert the necessary markup into all code blocks. [Include one of Prism’s stylesheets](http://prismjs.com/#basic-usage) in
+The plugin will insert the necessary markup into all code
+blocks. [Include one of Prism’s stylesheets](http://prismjs.com/#basic-usage) in
 your HTML to get highlighted code.
 
 ### Options
@@ -36,13 +38,20 @@ To specifiy the language of inline code, add `{language=<your-language>}` after 
 `class Demo { };`{language=cpp}
 ```
 
-This syntax is compatible with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs):
-The `language=<x>` part will be stripped, but everything else between `{` and `}` will work
-with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) as usual.
+### markdown-it-attrs
+
+This plugin is compatible with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs).
+For inline code, the `language` attribute will be interpreted as the highlight language and will _not_ be present as an HTML
+attribute.
+
+> [!IMPORTANT]
+>  1. For full compatibility, you must use [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) v5.0.0 or later.
+> 2. If you configure `allowedAttributes` for markdown-it-attrs, make sure to include `language`. Otherwise, you will not be able to specify the language of inline code. 
 
 ## Usage with Webpack
 
-If you want to use this plugin together with [Webpack](https://webpack.js.org/), you need to import all languages you intend to use:
+If you want to use this plugin together with [Webpack](https://webpack.js.org/), you need to import all languages you
+intend to use:
 
 ```javascript
 import MarkdownIt from 'markdown-it';
@@ -52,10 +61,10 @@ import "prismjs/components/prism-clike"
 import "prismjs/components/prism-java"
 
 function component() {
-	const md = new MarkdownIt();
-	md.use(prism);
-	const element = document.createElement('div');
-	element.innerHTML = md.render(`
+    const md = new MarkdownIt();
+    md.use(prism);
+    const element = document.createElement('div');
+    element.innerHTML = md.render(`
 Here is some *code*:
 \`\`\`java
 public class Test {
@@ -64,11 +73,11 @@ public class Test {
 \`\`\`
 `);
 
-	return element;
+    return element;
 }
 
 document.body.appendChild(component());
 ```
 
-*Beware*: Prisms languages have dependencies onto each other. You need to import the languages together with their dependencies in the
-correct order.
+> [!NOTE]
+> Prisms languages have dependencies onto each other. You need to import the languages together with their dependencies in the correct order.
