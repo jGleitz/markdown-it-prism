@@ -38,6 +38,26 @@ describe('plugin support', () => {
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
+	it('is compatible with markdown-it-attrs if using allowedAttributes and including `language` (attrs loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItAttrs, {
+				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
+			})
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/all-with-attrs.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
+	it('is compatible with markdown-it-attrs if using allowedAttributes and including `language`  (prism loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs, {
+				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
+			})
+			.render(await read('input/all-with-attrs.md'))
+		).toEqual(await read('expected/all-with-attrs.html'))
+	})
+
 	it('highlights a solitaire inline code when markdown-it-attrs is loaded (attrs loaded first)', async () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
