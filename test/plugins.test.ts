@@ -16,8 +16,8 @@ describe('plugin support', () => {
 
 	it('is compatible with markdown-it-attrs (prism loaded first)', async () => {
 		expect(markdownit()
-			.use(markdownItAttrs)
 			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs)
 			.render(await read('input/all-with-attrs.md'))
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
@@ -32,8 +32,8 @@ describe('plugin support', () => {
 
 	it('is compatible with markdown-it-attrs when using custom delimiters (prism loaded first)', async () => {
 		expect(markdownit()
-			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
 			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
 			.render(await read('input/all-with-attrs-custom-delimiters.md'))
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
@@ -42,6 +42,14 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
 			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/inline/with-language.md'))
+		).toEqual(await read('expected/inline/with-language.html'))
+	})
+
+	it('highlights a solitaire inline code when markdown-it-attrs is loaded (prism loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.use(markdownItAttrs)
 			.render(await read('input/inline/with-language.md'))
 		).toEqual(await read('expected/inline/with-language.html'))
 	})
