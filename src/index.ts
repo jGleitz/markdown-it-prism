@@ -136,16 +136,52 @@ function highlightWithSelectedLanguage(markdownit: MarkdownIt, options: Options,
 }
 
 /**
- * Construct the class name for the provided `lang`.
+ * Builds a MarkdownIt.Core.RuleCore that resolves fenced code block languages before rendering while preserving attributes.
  *
  * @param markdownit
  *        The markdown-it instance.
- * @param lang
- *        The selected language.
- * @return the class to use for `lang`.
+ * @param options
+ *        The options that have been used to initialise the plugin.
  */
-function languageClass(markdownit: MarkdownIt, lang: string): string {
-	return markdownit.options.langPrefix + lang
+function resolveFenceLanguageRule(markdownit: MarkdownIt, options: Options): MarkdownIt.Core.RuleCore {
+	return (state) => {
+		for (const token of state.tokens) {
+			if (token.type === 'fence') {
+				const resolvedInfo = resolveFenceInfo(markdownit, token.info, options)
+				if (resolvedInfo !== undefined) {
+					token.info = resolvedInfo
+				}
+			}
+		}
+	}
+}
+
+function resolveFenceInfo(markdownit: MarkdownIt, info: string, options: Options): string | undefined {
+	const trimmedInfo = markdownit.utils.unescapeAll(info).trim()
+	const firstToken = trimmedInfo.split(/(\s+)/g)[0]
+	const isAttributeOnly = firstToken.startsWith('{')
+	const originalLang = isAttributeOnly ? '' : firstToken
+	const rest = isAttributeOnly ? trimmedInfo : trimmedInfo.slice(originalLang.length)
+	const [langToUse] = selectLanguage(options, originalLang)
+
+	return joinResolvedInfo(langToUse, originalLang, rest)
+}
+
+function joinResolvedInfo(langToUse: string, originalLang: string, rest: string): string | undefined {
+	if (langToUse === '' || langToUse === originalLang) {
+		return undefined
+	}
+	return langToUse + infoSeparator(rest) + rest
+}
+
+function infoSeparator(rest: string): string {
+	if (rest === '') {
+		return ''
+	}
+	if (/^\s/.test(rest)) {
+		return ''
+	}
+	return ' '
 }
 
 /**
@@ -184,39 +220,6 @@ function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingTok
 }
 
 /**
- * Patch the `<pre>` and `<code>` tags produced by the `existingRule` for fenced code blocks.
- *
- * @param markdownit
- *        The markdown-it instance.
- * @param options
- *        The options that have been used to initialise the plugin.
- * @param existingRule
- *        The previously configured render rule for fenced code blocks.
- */
-function applyCodeAttributes(markdownit: MarkdownIt, options: Options, existingRule: Renderer.RenderRule): Renderer.RenderRule {
-	return (tokens, idx, renderOptions, env, self) => {
-		const fenceToken = tokens[idx]
-		const info = fenceToken.info ? markdownit.utils.unescapeAll(fenceToken.info).trim() : ''
-		const lang = info.split(/(\s+)/g)[0]
-		const [langToUse] = selectLanguage(options, lang)
-		if (!langToUse) {
-			return existingRule(tokens, idx, renderOptions, env, self)
-		} else {
-			fenceToken.info = langToUse
-			const existingResult = existingRule(tokens, idx, renderOptions, env, self)
-			const langClass = languageClass(markdownit, markdownit.utils.escapeHtml(langToUse))
-			return existingResult.replace(
-				/<((?:pre|code)[^>]*?)(?:\s+class="([^"]*)"([^>]*))?>/g,
-				(match, tagStart, existingClasses?: string, tagEnd?) =>
-					existingClasses?.includes(langClass)
-						? match
-						: `<${tagStart} class="${existingClasses ? `${existingClasses} ` : ''}${langClass}"${tagEnd || ''}>`
-			)
-		}
-	}
-}
-
-/**
  * Renders inline code tokens by highlighting them with Prism.
  *
  * @param markdownit
@@ -235,7 +238,7 @@ function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule
 			return existingRule(tokens, idx, renderOptions, env, self)
 		} else {
 			const highlighted = highlightWithSelectedLanguage(markdownit, options, inlineCodeToken.content, [langToUse, prismLang])
-			inlineCodeToken.attrJoin('class', languageClass(markdownit, langToUse))
+			inlineCodeToken.attrJoin('class', markdownit.options.langPrefix + langToUse)
 			return `<code${self.renderAttrs(inlineCodeToken)}>${highlighted}</code>`
 		}
 	}
@@ -290,7 +293,13 @@ export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Opt
 
 	// register ourselves as highlighter
 	markdownit.options.highlight = (text, lang) => highlight(markdownit, options, text, lang)
-	markdownit.renderer.rules.fence = applyCodeAttributes(markdownit, options, markdownit.renderer.rules.fence || renderFallback)
+	const resolveFenceLanguage = resolveFenceLanguageRule(markdownit, options)
+	const coreRuler = markdownit.core.ruler as MarkdownIt.Ruler<MarkdownIt.Core.RuleCore> & { __rules__: Array<{ name: string }> }
+	if (coreRuler.__rules__.some(rule => rule.name === 'linkify')) {
+		markdownit.core.ruler.after('linkify', 'prism_resolve_fence_language', resolveFenceLanguage)
+	} else {
+		markdownit.core.ruler.push('prism_resolve_fence_language', resolveFenceLanguage)
+	}
 	if (options.highlightInlineCode) {
 		markdownit.core.ruler.after('inline', 'prism_inline_code_language', inlineCodeLanguageRule)
 		markdownit.renderer.rules.code_inline = renderInlineCode(markdownit, options, markdownit.renderer.rules.code_inline || renderFallback)

@@ -36,9 +36,14 @@ To specifiy the language of inline code, add `{language=<your-language>}` after 
 `class Demo { };`{language=cpp}
 ```
 
-This syntax is compatible with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs):
+### markdown-it-attrs
+
+This plugin is compatible with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs).
+For inline code,
 The `language=<x>` part will be stripped, but everything else between `{` and `}` will work
 with [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) as usual.
+
+For full compatibility, you must use [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) *v5.0.0 or later*.
 
 ## Usage with Webpack
 
