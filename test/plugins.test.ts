@@ -38,6 +38,14 @@ describe('plugin support', () => {
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
+	it('highlights a solitaire inline code when markdown-it-attrs is loaded (attrs loaded first)', async () => {
+		expect(markdownit()
+			.use(markdownItAttrs)
+			.use(markdownItPrism, { highlightInlineCode: true })
+			.render(await read('input/inline/with-language.md'))
+		).toEqual(await read('expected/inline/with-language.html'))
+	})
+
 	it('allows using Prism plugins', async () => {
 		expect(markdownit()
 			.use(markdownItPrism, {

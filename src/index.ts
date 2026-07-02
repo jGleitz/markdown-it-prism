@@ -146,8 +146,8 @@ function inlineCodeLanguageRule(state: StateCore) {
 	for (const inlineToken of state.tokens) {
 		if (inlineToken.type === 'inline' && inlineToken.children !== null) {
 			for (const [index, token] of inlineToken.children.entries()) {
-				if (token.type === 'code_inline' && index + 1 < inlineToken.children.length) {
-					extractInlineCodeSpecifiedLanguage(token, inlineToken.children[index + 1])
+				if (token.type === 'code_inline') {
+					extractAndStoreInlineCodeSpecifiedLanguage(token, inlineToken.children.at(index + 1))
 				}
 			}
 		}
@@ -155,22 +155,22 @@ function inlineCodeLanguageRule(state: StateCore) {
 }
 
 /**
- * Searches for a language specification after an inline code token (e.g. ``{language=cpp}). If present, extracts the language, sets
- * it on `inlineCodeToken`’s meta, and removes the specification.
+ * Searches for a language specification after an inline code token (e.g. ``{language=cpp}). If present, extracts the
+ * language, sets it on {@link inlineCodeToken}’s meta, and removes the specification.
  *
  * @param inlineCodeToken
  *  The inline code token for which to extract the language.
  * @param followingToken
- *    The token immediately following the `inlineCodeToken`.
+ *    The token immediately following the{@link inlineCodeToken}. `undefined` if {@link inlineCodeToken} was the last token.
  */
-function extractInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingToken: Token) {
+function extractAndStoreInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingToken: Token | undefined) {
 	const langAttributeIndex = inlineCodeToken.attrIndex('language')
 	if (langAttributeIndex >= 0) {
 		// markdown-it-attrs was here and parsed the attributes for us. Neat!
 		const specifiedLanguage = inlineCodeToken.attrs![langAttributeIndex][1]
 		inlineCodeToken.attrs!.splice(langAttributeIndex, 1)
 		inlineCodeToken.meta = { ...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: specifiedLanguage }
-	} else {
+	} else if (followingToken !== undefined) {
 		// No specified language via already-parsed attributes. Let’s see whether we can find and parse a language specification ourselves
 		const languageSpecificationMatch = /^\{((?:[^\s}]+\s)*)language=([^\s}]+)((?:\s+[^\s}]+)*)\s*}/.exec(followingToken.content)
 		if (languageSpecificationMatch !== null) {
