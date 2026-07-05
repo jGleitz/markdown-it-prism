@@ -71,7 +71,7 @@
     "eslint": "10.6.0",
     "eslint-plugin-yml": "3.5.0",
     "jest": "30.4.2",
-    "markdown-it": "14.2.0",
+    "markdown-it": "14.3.0",
     "markdown-it-attrs": "5.0.0",
     "npm-run-all2": "9.0.2",
     "semantic-release": "25.0.5",
