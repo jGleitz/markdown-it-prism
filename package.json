@@ -74,7 +74,7 @@
     "markdown-it": "14.3.0",
     "markdown-it-attrs": "5.0.0",
     "npm-run-all2": "9.0.2",
-    "semantic-release": "25.0.6",
+    "semantic-release": "25.0.7",
     "typescript": "6.0.3",
     "typescript-eslint": "8.63.0"
   },
