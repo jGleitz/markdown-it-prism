@@ -75,7 +75,7 @@
     "markdown-it-attrs": "5.0.0",
     "npm-run-all2": "9.0.2",
     "semantic-release": "25.0.8",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "typescript-eslint": "8.65.0"
   },
   "packageManager": "pnpm@11.15.1"
