@@ -55,8 +55,8 @@ importers:
         specifier: 10.8.0
         version: 10.8.0(supports-color@8.1.1)
       eslint-plugin-yml:
-        specifier: 3.6.0
-        version: 3.6.0(eslint@10.8.0(supports-color@8.1.1))
+        specifier: 3.6.1
+        version: 3.6.1(eslint@10.8.0(supports-color@8.1.1))
       jest:
         specifier: 30.4.2
         version: 30.4.2(@types/node@24.13.3)(supports-color@8.1.1)
@@ -1781,8 +1781,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-yml@3.6.0:
-    resolution: {integrity: sha512-8lSqBIiOJO8ms1gktdlNaVGm3zXQJiYeKhQmtIG66XzU58kFDOjQae4sufQEMGHC4bP8VxiaH3tjU5PpDB6euw==}
+  eslint-plugin-yml@3.6.1:
+    resolution: {integrity: sha512-65KuRSfJHB3WEZfv6FytKkMUk/v94FyNEHpKMm8MDnZF5cPZHwFoIDNoA5yOrwZ/zDPjaHAV2Pf2PuNLGLGopw==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: '>=9.38.0'
@@ -5386,7 +5386,7 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-yml@3.6.0(eslint@10.8.0(supports-color@8.1.1)):
+  eslint-plugin-yml@3.6.1(eslint@10.8.0(supports-color@8.1.1)):
     dependencies:
       '@eslint/core': 1.2.1
       '@eslint/plugin-kit': 0.7.2
