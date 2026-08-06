@@ -2,7 +2,7 @@ import MarkdownIt from 'markdown-it'
 import prism from 'markdown-it-prism'
 
 if (typeof require !== 'undefined' || typeof __filename !== 'undefined') {
-	throw new Error('CJS globals present in native Node ESM — the plugins case no longer proves the import.meta.url loader path')
+	throw new TypeError('CJS globals present in native Node ESM — the plugins case no longer proves the import.meta.url loader path')
 }
 
 const markdown = new MarkdownIt().use(prism)

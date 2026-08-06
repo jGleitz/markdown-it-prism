@@ -2,7 +2,7 @@ import MarkdownIt = require('markdown-it')
 import prism = require('markdown-it-prism')
 
 if (typeof prism !== 'function') {
-	throw new Error('CommonJS require did not return a callable markdown-it plugin')
+	throw new TypeError('CommonJS require did not return a callable markdown-it plugin')
 }
 
 const markdown = new MarkdownIt()
