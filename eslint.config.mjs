@@ -16,9 +16,10 @@ export default defineConfig(
 	}),
 	{
 		ignores: [
-			'build/**',
+			'dist/**',
 			'node_modules/**',
 			'pnpm-lock.yaml',
+			'test-consuming/**',
 		],
 	},
 	{
