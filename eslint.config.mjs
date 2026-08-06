@@ -22,9 +22,6 @@ export default defineConfig(
 		],
 	},
 	{
-		languageOptions: {
-			ecmaVersion: 6,
-		},
 		rules: {
 			'linebreak-style': ['error', 'unix'],
 			'@typescript-eslint/ban-ts-comment': [
@@ -38,5 +35,5 @@ export default defineConfig(
 		rules: {
 			'@stylistic/spaced-comment': 'off',
 		},
-	}
+	},
 )
