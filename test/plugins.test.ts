@@ -1,9 +1,12 @@
-import markdownit from 'markdown-it/dist/index.cjs.js'
+import { createRequire } from 'node:module'
 import markdownItAttrs from 'markdown-it-attrs'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import markdownItPrism from '../src/index.js'
 import { read } from './util.js'
+
+const require = createRequire(import.meta.url)
+const markdownit = require('markdown-it')
 
 describe('plugin support', () => {
 	afterEach(() => vi.resetModules())
