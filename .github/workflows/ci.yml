@@ -38,14 +38,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # This matrix lists every supported markdown-it major's latest line; when markdown-it ships a new major, add a leg to preserve the backwards-compatibility infrastructure for future majors.
         mi-version:
-          - 7.0.1
-          - 8.4.2
-          - 9.1.0
-          - 10.0.0
-          - 11.0.1
-          - 12.3.2
-          - 13.0.2
+          - 15
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -65,6 +60,8 @@ jobs:
           cache: pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+      - name: Type-check
+        run: pnpm lint:types
       - name: Unit Tests
         run: npm run unittest
 
