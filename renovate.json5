@@ -9,6 +9,6 @@
          renovate/renovate --dry-run=full --platform=local
   */
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  baseBranches: ["main", "v5"],
+  baseBranchPatterns: ["main", "v5"],
   extends: ["github>jGleitz/renovate-config:default.json5"],
 }
