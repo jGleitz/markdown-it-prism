@@ -1,16 +1,18 @@
-import markdownit from 'markdown-it'
+import markdownit from 'markdown-it/dist/index.cjs.js'
 import markdownItAttrs from 'markdown-it-attrs'
-import markdownItPrism from '../src'
-import { read } from './util'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+
+import markdownItPrism from '../src/index.js'
+import { read } from './util.js'
 
 describe('plugin support', () => {
-	afterEach(() => jest.resetModules())
+	afterEach(() => vi.resetModules())
 
 	it('is compatible with markdown-it-attrs (attrs loaded first)', async () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
 			.use(markdownItPrism, { highlightInlineCode: true })
-			.render(await read('input/all-with-attrs.md'))
+			.render(await read('input/all-with-attrs.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -18,7 +20,7 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItPrism, { highlightInlineCode: true })
 			.use(markdownItAttrs)
-			.render(await read('input/all-with-attrs.md'))
+			.render(await read('input/all-with-attrs.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -26,7 +28,7 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
 			.use(markdownItPrism, { highlightInlineCode: true })
-			.render(await read('input/all-with-attrs-custom-delimiters.md'))
+			.render(await read('input/all-with-attrs-custom-delimiters.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -34,7 +36,7 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItPrism, { highlightInlineCode: true })
 			.use(markdownItAttrs, { leftDelimiter: '«', rightDelimiter: '»' })
-			.render(await read('input/all-with-attrs-custom-delimiters.md'))
+			.render(await read('input/all-with-attrs-custom-delimiters.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -44,7 +46,7 @@ describe('plugin support', () => {
 				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
 			})
 			.use(markdownItPrism, { highlightInlineCode: true })
-			.render(await read('input/all-with-attrs.md'))
+			.render(await read('input/all-with-attrs.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -54,7 +56,7 @@ describe('plugin support', () => {
 			.use(markdownItAttrs, {
 				allowedAttributes: ['id', 'class', 'foo', 'data-custom', 'lang', 'language'],
 			})
-			.render(await read('input/all-with-attrs.md'))
+			.render(await read('input/all-with-attrs.md')),
 		).toEqual(await read('expected/all-with-attrs.html'))
 	})
 
@@ -62,7 +64,7 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItAttrs)
 			.use(markdownItPrism, { highlightInlineCode: true })
-			.render(await read('input/inline/with-language.md'))
+			.render(await read('input/inline/with-language.md')),
 		).toEqual(await read('expected/inline/with-language.html'))
 	})
 
@@ -70,7 +72,7 @@ describe('plugin support', () => {
 		expect(markdownit()
 			.use(markdownItPrism, { highlightInlineCode: true })
 			.use(markdownItAttrs)
-			.render(await read('input/inline/with-language.md'))
+			.render(await read('input/inline/with-language.md')),
 		).toEqual(await read('expected/inline/with-language.html'))
 	})
 
@@ -83,14 +85,14 @@ describe('plugin support', () => {
 					'show-language',
 				],
 			})
-			.render(await read('input/all-with-language.md'))
+			.render(await read('input/all-with-language.md')),
 		).toEqual(await read('expected/all-with-language-and-plugins.html'))
 	})
 
 	it('loads with the commonmark preset and renders fenced code', async () => {
 		expect(markdownit('commonmark')
 			.use(markdownItPrism)
-			.render('```js\nconst value = 1\n```')
+			.render('```js\nconst value = 1\n```'),
 		).toEqual('<pre><code class="language-js"><span class="token keyword keyword-const">const</span> value <span class="token operator">=</span> <span class="token number">1</span>\n</code></pre>\n')
 	})
 })

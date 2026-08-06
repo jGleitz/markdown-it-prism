@@ -1,8 +1,9 @@
 import markdownit from 'markdown-it'
+import { beforeAll, describe, expect, it } from 'vitest'
 
-import markdownItPrism from '../src'
-import { read } from './util'
-import loadLanguages from 'prismjs/components/index'
+import markdownItPrism from '../src/index.js'
+import { read } from './util.js'
+import loadLanguages from 'prismjs/components/index.js'
 
 const codeSectionTypeSettings = {
 	fenced: {},

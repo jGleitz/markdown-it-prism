@@ -1,6 +1,8 @@
 import markdownit from 'markdown-it'
-import markdownItPrism from '../src'
-import loadLanguages from 'prismjs/components/index'
+import { beforeAll, describe, expect, it, vi } from 'vitest'
+
+import markdownItPrism from '../src/index.js'
+import loadLanguages from 'prismjs/components/index.js'
 
 describe('option handling', () => {
 	beforeAll(() => {
@@ -36,7 +38,7 @@ describe('option handling', () => {
 	})
 
 	it('offers an init function for further initialisation', () => {
-		const initCallback = jest.fn((prism) => {
+		const initCallback = vi.fn((prism) => {
 			expect(prism).toHaveProperty('plugins')
 		})
 		markdownit()
