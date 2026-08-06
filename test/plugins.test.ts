@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import markdownItPrism from '../src/index.js'
 import { read } from './util.js'
 
+// markdown-it-attrs loads markdown-it through CJS and compares the default fence renderer by identity, so this test uses the same public CJS package root.
 const require = createRequire(import.meta.url)
 const markdownit = require('markdown-it')
 
