@@ -1,4 +1,6 @@
 /node_modules/
-/build/
+/dist/
 /.idea/
 /.omo/
+test-consuming/**/dist/
+test-consuming/**/node_modules/
