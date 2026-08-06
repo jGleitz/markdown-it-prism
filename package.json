@@ -1,5 +1,6 @@
 {
   "name": "markdown-it-prism",
+  "type": "module",
   "description": "Highlights code blocks in markdown-it using Prism.",
   "keywords": [
     "markdown-it",
@@ -34,12 +35,12 @@
     "build:types": "tsc --project src",
     "build": "npm-run-all build:*",
     "format": "eslint --fix .",
-    "lint": "npm-run-all lint:*",
+    "lint": "npm-run-all lint:types lint:style",
     "lint:types": "tsc",
     "lint:style": "eslint .",
     "prepack": "npm-run-all build:*",
-    "unittest": "jest",
-    "test": "npm-run-all lint:* unittest",
+    "unittest": "vitest run",
+    "test": "npm-run-all lint unittest",
     "release": "semantic-release"
   },
   "dependencies": {
@@ -63,20 +64,19 @@
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.0.1",
     "@stylistic/eslint-plugin": "5.10.0",
-    "@types/jest": "30.0.0",
     "@types/markdown-it": "14.1.2",
     "@types/node": "24.13.3",
     "@types/prismjs": "1.26.6",
     "babel-plugin-add-module-exports": "1.0.4",
     "eslint": "10.8.0",
     "eslint-plugin-yml": "3.7.0",
-    "jest": "30.4.2",
     "markdown-it": "14.3.0",
     "markdown-it-attrs": "5.0.1",
     "npm-run-all2": "9.0.3",
     "semantic-release": "25.0.8",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.65.0"
+    "typescript-eslint": "8.65.0",
+    "vitest": "4.1.6"
   },
   "packageManager": "pnpm@11.19.0"
 }

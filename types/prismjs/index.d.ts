@@ -1,4 +1,4 @@
-declare module 'prismjs/components/' {
+declare module 'prismjs/components/index.js' {
 	interface LoadLanguages {
 		(languages: string | string[]): void
 		silent: boolean
