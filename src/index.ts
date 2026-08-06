@@ -7,6 +7,7 @@ const require = createRequire(
 	typeof __filename === 'undefined' ? import.meta.url : __filename,
 )
 
+// Temporary @types/markdown-it v14 NodeNext bridge; T10/T11 replace these with markdown-it v15 named types.
 type CoreRule = Parameters<MarkdownIt['core']['ruler']['push']>[1]
 type Token = ReturnType<MarkdownIt['parse']>[number]
 type RenderRule = NonNullable<MarkdownIt['renderer']['rules']['code_inline']>
