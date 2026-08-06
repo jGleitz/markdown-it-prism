@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "../build",
-    "noEmit": false,
-    "emitDeclarationOnly": true
-  }
-}

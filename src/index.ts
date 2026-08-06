@@ -1,6 +1,15 @@
 import Prism, { Grammar } from 'prismjs'
-import loadLanguages from 'prismjs/components/'
-import MarkdownIt, { Renderer, StateCore, Token } from 'markdown-it'
+import loadLanguages from 'prismjs/components/index.js'
+import MarkdownIt from 'markdown-it'
+import { createRequire } from 'node:module'
+
+const require = createRequire(
+	typeof __filename === 'undefined' ? import.meta.url : __filename,
+)
+
+type CoreRule = Parameters<MarkdownIt['core']['ruler']['push']>[1]
+type Token = ReturnType<MarkdownIt['parse']>[number]
+type RenderRule = NonNullable<MarkdownIt['renderer']['rules']['code_inline']>
 
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
 
@@ -127,7 +136,7 @@ function highlight(markdownit: MarkdownIt, text: string, lang: string, prismGram
  * @param options
  *        The options that have been used to initialise the plugin.
  */
-function createFencedCodeLanguageFallbackRule(options: Options): MarkdownIt.Core.RuleCore {
+function createFencedCodeLanguageFallbackRule(options: Options): CoreRule {
 	return (state) => {
 		for (const token of state.tokens) {
 			if (token.type === 'fence') {
@@ -142,7 +151,7 @@ function createFencedCodeLanguageFallbackRule(options: Options): MarkdownIt.Core
 /**
  * A {@link RuleCore} that searches for and extracts language specifications on inline code tokens.
  */
-function inlineCodeLanguageRule(state: StateCore) {
+function inlineCodeLanguageRule(state: Parameters<CoreRule>[0]) {
 	for (const inlineToken of state.tokens) {
 		if (inlineToken.type === 'inline' && inlineToken.children !== null) {
 			for (const [index, token] of inlineToken.children.entries()) {
@@ -194,7 +203,7 @@ function extractAndStoreInlineCodeSpecifiedLanguage(inlineCodeToken: Token, foll
  * @param existingRule
  *        The previously configured render rule for inline code.
  */
-function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: Renderer.RenderRule): Renderer.RenderRule {
+function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
 	return (tokens, idx, renderOptions, env, self) => {
 		const inlineCodeToken = tokens[idx]
 		const specifiedLanguage = inlineCodeToken.meta ? (inlineCodeToken.meta[SPECIFIED_LANGUAGE_META_KEY] || '') : ''
@@ -231,7 +240,7 @@ function checkLanguageOption(
 /**
  * ‘the most basic rule to render a token’ (https://github.com/markdown-it/markdown-it/blob/master/docs/examples/renderer_rules.md)
  */
-function renderFallback(tokens: Token[], idx: number, options: MarkdownIt.Options, env: unknown, self: Renderer): string {
+function renderFallback(tokens: Token[], idx: number, options: Parameters<RenderRule>[2], env: unknown, self: Parameters<RenderRule>[4]): string {
 	return self.renderToken(tokens, idx, options)
 }
 
