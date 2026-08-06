@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, renovate/**]
+    branches: [main, v5, v4.x, renovate/**]
   pull_request: {}
 
 permissions:
