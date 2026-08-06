@@ -45,4 +45,20 @@ describe('option handling', () => {
 			.use(markdownItPrism, { init: initCallback })
 		expect(initCallback).toHaveBeenCalled()
 	})
+
+	it('uses defaults when required options are explicitly undefined', () => {
+		const input = '```js\nconst value = 1\n```'
+		const defaultRender = markdownit()
+			.use(markdownItPrism)
+			.render(input)
+		const explicitUndefinedRender = markdownit()
+			.use(markdownItPrism, {
+				plugins: undefined,
+				init: undefined,
+				highlightInlineCode: undefined,
+			})
+			.render(input)
+
+		expect(explicitUndefinedRender).toBe(defaultRender)
+	})
 })

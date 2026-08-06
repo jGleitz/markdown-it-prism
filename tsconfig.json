@@ -13,7 +13,10 @@
     "typeRoots": [
       "types",
       "node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "markdown-it-attrs": ["./types/markdown-it-attrs/index.d.ts"]
+    }
   },
   "exclude": ["tsup.config.ts"]
 }

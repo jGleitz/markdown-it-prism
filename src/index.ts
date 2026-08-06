@@ -1,33 +1,38 @@
 import Prism, { Grammar } from 'prismjs'
 import loadLanguages from 'prismjs/components/index.js'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import MarkdownIt from 'markdown-it'
+import type {
+	Env,
+	MarkdownIt as MarkdownItInstance,
+	MarkdownItOptions,
+	Renderer,
+	RendererRule,
+	StateCore,
+	Token,
+} from 'markdown-it'
 import { createRequire } from 'node:module'
 
 const require = createRequire(
 	typeof __filename === 'undefined' ? import.meta.url : __filename,
 )
 
-// Temporary @types/markdown-it v14 NodeNext bridge; T10/T11 replace these with markdown-it v15 named types.
-type CoreRule = Parameters<MarkdownIt['core']['ruler']['push']>[1]
-type Token = ReturnType<MarkdownIt['parse']>[number]
-type RenderRule = NonNullable<MarkdownIt['renderer']['rules']['code_inline']>
-
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
 
-interface Options {
+export interface Options {
 	/**
 	 * Whether to highlight inline code. Defaults to `false`.
 	 */
-	highlightInlineCode: boolean
+	highlightInlineCode?: boolean
 	/**
 	 * Prism plugins to load.
 	 */
-	plugins: string[]
+	plugins?: string[]
 	/**
 	 * Callback for Prism initialisation. Useful for initialising plugins.
 	 * @param prism The Prism instance that will be used by the plugin.
 	 */
-	init: (prism: typeof Prism) => void
+	init?: (prism: typeof Prism) => void
 	/**
 	 * The language to use for code blocks that specify a language that Prism does not know.
 	 */
@@ -43,15 +48,18 @@ interface Options {
 	defaultLanguage?: string
 }
 
-const DEFAULTS: Options = {
+interface ResolvedOptions extends Options {
+	highlightInlineCode: boolean
+	plugins: string[]
+	init: (prism: typeof Prism) => void
+}
+
+const DEFAULTS: ResolvedOptions = {
 	highlightInlineCode: false,
 	plugins: [],
 	init: () => {
 		// do nothing by default
 	},
-	defaultLanguageForUnknown: undefined,
-	defaultLanguageForUnspecified: undefined,
-	defaultLanguage: undefined,
 }
 
 /**
@@ -80,7 +88,6 @@ function loadPrismGrammar(lang: string): Grammar | undefined {
  */
 function loadPrismPlugin(name: string): void {
 	try {
-		// eslint-disable-next-line @typescript-eslint/no-require-imports
 		require(`prismjs/plugins/${name}/prism-${name}`)
 	} catch (cause) {
 		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`, { cause })
@@ -96,7 +103,7 @@ function loadPrismPlugin(name: string): void {
  *        Code of the language to highlight the text in.
  * @return The name of the language to use and the Prism language object for that language.
  */
-function selectLanguage(options: Options, lang: string): [string, Grammar | undefined] {
+function selectLanguage(options: ResolvedOptions, lang: string): [string, Grammar | undefined] {
 	let langToUse = lang
 	if (langToUse === '' && options.defaultLanguageForUnspecified !== undefined) {
 		langToUse = options.defaultLanguageForUnspecified
@@ -124,12 +131,12 @@ function selectLanguage(options: Options, lang: string): [string, Grammar | unde
  * @return If {@link prismGrammar} `!== undefined` (i.e. Prism knows {@link lang}), the {@link text} highlighted for
  * that language. Otherwise, {@link text} html-escaped.
  */
-function highlight(markdownit: MarkdownIt, text: string, lang: string, prismGrammar: Grammar | undefined): string {
+function highlight(markdownit: MarkdownItInstance, text: string, lang: string, prismGrammar: Grammar | undefined): string {
 	return prismGrammar ? Prism.highlight(text, prismGrammar, lang) : markdownit.utils.escapeHtml(text)
 }
 
 /**
- * Builds a {@link RuleCore} that modifies the programming language of fenced code blocks before
+ * Builds a {@link StateCore} rule that modifies the programming language of fenced code blocks before
  * rendering. This is necessary to implement the options {@link Options.defaultLanguageForUnknown},
  * {@link Options.defaultLanguageForUnspecified}, and {@link Options.defaultLanguage}. We cannot implement those options
  * in {@link highlight} because e.g. unknown languages will already have been removed by markdown-it.
@@ -137,7 +144,7 @@ function highlight(markdownit: MarkdownIt, text: string, lang: string, prismGram
  * @param options
  *        The options that have been used to initialise the plugin.
  */
-function createFencedCodeLanguageFallbackRule(options: Options): CoreRule {
+function createFencedCodeLanguageFallbackRule(options: ResolvedOptions): (state: StateCore) => void {
 	return (state) => {
 		for (const token of state.tokens) {
 			if (token.type === 'fence') {
@@ -150,9 +157,9 @@ function createFencedCodeLanguageFallbackRule(options: Options): CoreRule {
 }
 
 /**
- * A {@link RuleCore} that searches for and extracts language specifications on inline code tokens.
+ * A {@link StateCore} rule that searches for and extracts language specifications on inline code tokens.
  */
-function inlineCodeLanguageRule(state: Parameters<CoreRule>[0]) {
+function inlineCodeLanguageRule(state: StateCore): void {
 	for (const inlineToken of state.tokens) {
 		if (inlineToken.type === 'inline' && inlineToken.children !== null) {
 			for (const [index, token] of inlineToken.children.entries()) {
@@ -175,10 +182,10 @@ function inlineCodeLanguageRule(state: Parameters<CoreRule>[0]) {
  */
 function extractAndStoreInlineCodeSpecifiedLanguage(inlineCodeToken: Token, followingToken: Token | undefined) {
 	const langAttributeIndex = inlineCodeToken.attrIndex('language')
-	if (langAttributeIndex >= 0) {
+	if (langAttributeIndex >= 0 && inlineCodeToken.attrs !== null) {
 		// markdown-it-attrs was here and parsed the attributes for us. Neat!
-		const specifiedLanguage = inlineCodeToken.attrs![langAttributeIndex][1]
-		inlineCodeToken.attrs!.splice(langAttributeIndex, 1)
+		const specifiedLanguage = String(inlineCodeToken.attrs[langAttributeIndex][1])
+		inlineCodeToken.attrs.splice(langAttributeIndex, 1)
 		inlineCodeToken.meta = { ...inlineCodeToken.meta, [SPECIFIED_LANGUAGE_META_KEY]: specifiedLanguage }
 	} else if (followingToken !== undefined) {
 		// No specified language via already-parsed attributes. Let’s see whether we can find and parse a language specification ourselves
@@ -204,10 +211,11 @@ function extractAndStoreInlineCodeSpecifiedLanguage(inlineCodeToken: Token, foll
  * @param existingRule
  *        The previously configured render rule for inline code.
  */
-function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule: RenderRule): RenderRule {
+function renderInlineCode(markdownit: MarkdownItInstance, options: ResolvedOptions, existingRule: RendererRule): RendererRule {
 	return (tokens, idx, renderOptions, env, self) => {
 		const inlineCodeToken = tokens[idx]
-		const specifiedLanguage = inlineCodeToken.meta ? (inlineCodeToken.meta[SPECIFIED_LANGUAGE_META_KEY] || '') : ''
+		const meta = inlineCodeToken.meta?.[SPECIFIED_LANGUAGE_META_KEY]
+		const specifiedLanguage = typeof meta === 'string' ? meta : ''
 		const [langToUse, prismGrammar] = selectLanguage(options, specifiedLanguage)
 		if (langToUse) {
 			const highlighted = highlight(markdownit, inlineCodeToken.content, langToUse, prismGrammar)
@@ -229,7 +237,7 @@ function renderInlineCode(markdownit: MarkdownIt, options: Options, existingRule
  * @throws {Error} If the option is not set to a valid Prism language.
  */
 function checkLanguageOption(
-	options: Options,
+	options: ResolvedOptions,
 	optionName: 'defaultLanguage' | 'defaultLanguageForUnknown' | 'defaultLanguageForUnspecified',
 ): void {
 	const language = options[optionName]
@@ -241,7 +249,13 @@ function checkLanguageOption(
 /**
  * ‘the most basic rule to render a token’ (https://github.com/markdown-it/markdown-it/blob/master/docs/examples/renderer_rules.md)
  */
-function renderFallback(tokens: Token[], idx: number, options: Parameters<RenderRule>[2], env: unknown, self: Parameters<RenderRule>[4]): string {
+function renderFallback(
+	tokens: Token[],
+	idx: number,
+	options: Required<MarkdownItOptions>,
+	env: Env | undefined,
+	self: Renderer,
+): string {
 	return self.renderToken(tokens, idx, options)
 }
 
@@ -254,8 +268,14 @@ function renderFallback(tokens: Token[], idx: number, options: Parameters<Render
  * @param useroptions
  *        The options this plugin is being initialised with.
  */
-export default function markdownItPrism(markdownit: MarkdownIt, useroptions: Options): void {
-	const options = { ...DEFAULTS, ...useroptions }
+export default function markdownItPrism(markdownit: MarkdownItInstance, useroptions: Options = {}): void {
+	const options: ResolvedOptions = {
+		...DEFAULTS,
+		...useroptions,
+		highlightInlineCode: useroptions.highlightInlineCode ?? DEFAULTS.highlightInlineCode,
+		plugins: useroptions.plugins ?? DEFAULTS.plugins,
+		init: useroptions.init ?? DEFAULTS.init,
+	}
 
 	checkLanguageOption(options, 'defaultLanguage')
 	checkLanguageOption(options, 'defaultLanguageForUnknown')
