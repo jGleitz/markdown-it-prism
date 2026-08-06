@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
+    "ignoreDeprecations": "6.0",
     "types": ["node"],
     "allowJs": false,
     "noEmit": true,
@@ -13,5 +14,6 @@
       "types",
       "node_modules/@types"
     ]
-  }
+  },
+  "exclude": ["tsup.config.ts"]
 }
