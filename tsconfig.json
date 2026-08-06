@@ -18,5 +18,5 @@
       "markdown-it-attrs": ["./types/markdown-it-attrs/index.d.ts"]
     }
   },
-  "exclude": ["tsup.config.ts"]
+  "exclude": ["tsup.config.ts", "test-consuming"]
 }
