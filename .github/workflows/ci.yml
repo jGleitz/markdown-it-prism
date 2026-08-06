@@ -79,7 +79,7 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
       - name: Lint Package
@@ -88,10 +88,10 @@ jobs:
         run: pnpm pack --pack-destination "$RUNNER_TEMP/v5-smoke"
       - name: Test ESM Consumer
         working-directory: test-consuming/esm
-        run: rm -rf node_modules dist && npm install --ignore-scripts --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@15.0.0 prismjs typescript@7.0.2 @types/node && npx --ignore-scripts --no-install tsc -p tsconfig.json && node dist/test.mjs
+        run: rm -rf node_modules dist && npm install --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@^15 prismjs typescript@^7 @types/node && npx tsc -p tsconfig.json && node dist/test.mjs
       - name: Test CJS Consumer
         working-directory: test-consuming/cjs
-        run: rm -rf node_modules dist && npm install --ignore-scripts --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@15.0.0 prismjs typescript@7.0.2 @types/node && npx --ignore-scripts --no-install tsc -p tsconfig.json && node dist/test.cjs
+        run: rm -rf node_modules dist && npm install --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@^15 prismjs typescript@^7 @types/node && npx tsc -p tsconfig.json && node dist/test.cjs
       - name: Verify Clean Worktree
         run: |
           git status --porcelain
