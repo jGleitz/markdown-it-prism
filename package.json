@@ -81,7 +81,7 @@
     "@eslint/json": "2.0.1",
     "@stylistic/eslint-plugin": "5.10.0",
     "@types/node": "24.13.3",
-    "@typescript/native": "npm:typescript@7.0.2",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "10.8.1",
     "eslint-plugin-yml": "3.8.1",
     "markdown-it": "15.0.0",
@@ -90,9 +90,9 @@
     "publint": "0.3.23",
     "semantic-release": "25.0.9",
     "tsup": "8.5.1",
-    "typescript": "npm:@typescript/typescript6@6.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "8.66.0",
-    "vitest": "4.1.10"
+    "vitest": "4.1.6"
   },
   "packageManager": "pnpm@11.20.0"
 }
