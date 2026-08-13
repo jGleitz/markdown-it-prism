@@ -9,14 +9,16 @@ const script = dom.window.document.createElement('script')
 script.textContent = await readFile(new URL('./dist/main.bundle.js', import.meta.url), 'utf8')
 dom.window.document.body.appendChild(script)
 
-const expectedPluginValue = mode === 'A' ? 'keyword-class' : 'markdown-it-prism: the "plugins" option requires Node.js module loading and is not supported in browser/bundler targets — import Prism languages manually instead (tracking: https://github.com/jGleitz/markdown-it-prism/issues/1147)'
-const expectedNegativeValue = mode === 'A' ? 'Cannot load Prism plugin "definitely-not-a-prism-plugin". Please check the spelling.' : expectedPluginValue
-const value = (id) => dom.window.document.querySelector(id)?.innerHTML ?? ''
-const pluginMatches = (id) => mode === 'A' ? value(id).includes(expectedPluginValue) : value(id) === expectedPluginValue
-const results = Object.fromEntries([
-	['CORE', value('#output').includes('<span class="token')], ['PLUGINS', pluginMatches('#plugins')],
-	['NEG', value('#plugins-neg') === expectedNegativeValue], ['CONTROL', value('#control').includes('class="token keyword"') && !value('#control').includes('keyword-class')],
-	['DUP', mode === 'A' ? value('#plugins-dup').split('keyword-class').length - 1 === 1 : pluginMatches('#plugins-dup')],
-])
-for (const [name, passed] of Object.entries(results)) console.log(`${name}:${passed ? 'PASS' : 'FAIL'}`)
-if (Object.values(results).includes(false)) process.exitCode = 1
+const html = Object.fromEntries(['control', 'output', 'plugins', 'plugins-neg', 'plugins-dup'].map((id) => [id, dom.window.document.querySelector(`#${id}`)?.innerHTML ?? '']))
+const nodeOnly = 'markdown-it-prism: the "plugins" option requires Node.js module loading and is not supported in browser/bundler targets — import Prism languages manually instead (tracking: https://github.com/jGleitz/markdown-it-prism/issues/1147)'
+const checks = mode === 'A' ? [
+	['CORE', html.output.includes('<span class="token')], ['PLUGINS', html.plugins.includes('keyword-class')],
+	['NEG', html['plugins-neg'] === 'Cannot load Prism plugin "definitely-not-a-prism-plugin". Please check the spelling.'],
+	['CONTROL', html.control.includes('class="token keyword"') && !html.control.includes('keyword-class')],
+	['DUP', html['plugins-dup'].split('keyword-class').length - 1 === 1],
+] : [
+	['CORE', html.output.includes('<span class="token')], ['PLUGINS', html.plugins === nodeOnly], ['NEG', html['plugins-neg'] === nodeOnly],
+	['CONTROL', html.control.includes('class="token keyword"') && !html.control.includes('keyword-class')], ['DUP', html['plugins-dup'] === nodeOnly],
+]
+for (const [name, passed] of checks) console.log(`${name}:${passed ? 'PASS' : 'FAIL'}`)
+if (checks.some(([, passed]) => !passed)) process.exitCode = 1
