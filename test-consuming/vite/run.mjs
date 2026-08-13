@@ -22,6 +22,5 @@ const results = Object.fromEntries([
 	['NEG', value('#plugins-neg') === expectedNegativeValue], ['CONTROL', value('#control').includes('class="token keyword"') && !value('#control').includes('keyword-class')],
 	['DUP', mode === 'A' ? value('#plugins-dup').split('keyword-class').length - 1 === 1 : pluginMatches('#plugins-dup')],
 ])
-
 for (const [name, passed] of Object.entries(results)) console.log(`${name}:${passed ? 'PASS' : 'FAIL'}`)
 if (Object.values(results).includes(false)) process.exitCode = 1
