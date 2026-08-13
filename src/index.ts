@@ -11,11 +11,11 @@ import type {
 	StateCore,
 	Token,
 } from 'markdown-it'
-import { createRequire } from 'node:module'
-
-const require = createRequire(
-	typeof __filename === 'undefined' ? import.meta.url : __filename,
-)
+const runtimeRequire = typeof require === 'function' && typeof process !== 'undefined'
+	? require
+	: typeof process !== 'undefined' && typeof process.getBuiltinModule === 'function'
+		? process.getBuiltinModule('node:module').createRequire(import.meta.url)
+		: undefined
 
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
 
@@ -87,8 +87,11 @@ function loadPrismGrammar(lang: string): Grammar | undefined {
  * @throws {Error} If there is no plugin with the provided `name`.
  */
 function loadPrismPlugin(name: string): void {
+	if (runtimeRequire === undefined) {
+		throw new Error('markdown-it-prism: the "plugins" option requires Node.js module loading and is not supported in browser/bundler targets — import Prism languages manually instead (tracking: https://github.com/jGleitz/markdown-it-prism/issues/1147)')
+	}
 	try {
-		require(`prismjs/plugins/${name}/prism-${name}`)
+		runtimeRequire(`prismjs/plugins/${name}/prism-${name}`)
 	} catch (cause) {
 		throw new Error(`Cannot load Prism plugin "${name}". Please check the spelling.`, { cause })
 	}
