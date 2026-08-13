@@ -8,10 +8,10 @@
 v5 is a major release with breaking changes. When upgrading from v4.x, check these points:
 
 1. **markdown-it v15 only.** v5 requires `markdown-it` v15. Older markdown-it versions (<15) are no longer supported.
-2. **Node.js 22 or later.** v5 requires Node.js >= 22.
+2. **Node.js 22.3 or later.** v5 requires Node.js >= 22.3.
 3. **Dual ESM and CJS.** v5 ships native ESM and CommonJS through conditional exports. `require('markdown-it-prism')` keeps working unchanged, and `import prism from 'markdown-it-prism'` is now a native ESM import.
 4. **Remove `@types/markdown-it`.** markdown-it bundles its own type definitions since v15, so you no longer need a separate `@types/markdown-it` dependency. Remove it if you have one.
-5. **Temporary regression: browser bundlers.** v5.0.0 does not work in browser bundlers (Webpack/Vite browser targets). Restoration is tracked in [#1147](https://github.com/jGleitz/markdown-it-prism/issues/1147). If you bundle this plugin for the browser, stay on v4.x until the restoration lands.
+5. **Browser bundlers support the core flow.** Webpack and Vite can bundle v5 when Prism languages are imported manually. The `plugins:` option remains Node.js-only in browser/bundler targets; completing plugin support is tracked in [#1147](https://github.com/jGleitz/markdown-it-prism/issues/1147).
 
 ## Usage
 
@@ -74,7 +74,7 @@ attribute.
 ## Usage with Webpack
 
 > [!IMPORTANT]
-> This section applies to markdown-it-prism **v4.x only**. v5.0.0 does not work in browser bundlers yet; restoration is tracked in [#1147](https://github.com/jGleitz/markdown-it-prism/issues/1147). Stay on v4.x for bundler usage until the restoration lands.
+> The `plugins:` option requires Node.js module loading and is not supported in browser/bundler targets. Import Prism languages manually as shown below. Browser plugin support is tracked in [#1147](https://github.com/jGleitz/markdown-it-prism/issues/1147).
 
 If you want to use this plugin together with [Webpack](https://webpack.js.org/), you need to import all languages you
 intend to use:

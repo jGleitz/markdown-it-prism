@@ -92,6 +92,12 @@ jobs:
       - name: Test CJS Consumer
         working-directory: test-consuming/cjs
         run: rm -rf node_modules dist && npm install --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@^15 prismjs typescript@^7 @types/node && npx tsc -p tsconfig.json && node dist/test.cjs
+      - name: Test Webpack Consumer
+        working-directory: test-consuming/webpack
+        run: rm -rf node_modules dist && npm install --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@^15 prismjs webpack@5.109.2 jsdom@30.0.1 && node build.mjs && node run.mjs B
+      - name: Test Vite Consumer
+        working-directory: test-consuming/vite
+        run: rm -rf node_modules dist && npm install --no-save --package-lock=false "$RUNNER_TEMP/v5-smoke/markdown-it-prism-0.0.0-development.tgz" markdown-it@^15 prismjs vite@8.2.0 jsdom@30.0.1 && npx --no-install vite build && node run.mjs B
       - name: Verify Clean Worktree
         run: |
           git status --porcelain
