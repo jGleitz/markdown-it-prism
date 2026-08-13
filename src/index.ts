@@ -11,11 +11,15 @@ import type {
 	StateCore,
 	Token,
 } from 'markdown-it'
-const runtimeRequire = typeof require === 'function' && typeof process !== 'undefined'
-	? require
-	: typeof process !== 'undefined' && typeof process.getBuiltinModule === 'function'
-		? process.getBuiltinModule('node:module').createRequire(import.meta.url)
-		: undefined
+function resolveRuntimeRequire(): NodeJS.Require | undefined {
+	if (typeof require === 'function' && typeof process !== 'undefined') return require
+	if (typeof process !== 'undefined' && typeof process.getBuiltinModule === 'function') {
+		return process.getBuiltinModule('node:module').createRequire(import.meta.url)
+	}
+	return undefined
+}
+
+const runtimeRequire = resolveRuntimeRequire()
 
 const SPECIFIED_LANGUAGE_META_KEY = 'de.joshuagleitze.markdown-it-prism.specifiedLanguage'
 
