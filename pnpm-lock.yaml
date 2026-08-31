@@ -40,11 +40,11 @@ importers:
         specifier: 3.8.1
         version: 3.8.1(eslint@10.9.1(supports-color@8.1.1))
       markdown-it:
-        specifier: 15.0.0
-        version: 15.0.0
+        specifier: 15.0.1
+        version: 15.0.1
       markdown-it-attrs:
         specifier: 5.0.1
-        version: 5.0.1(markdown-it@15.0.0)
+        version: 5.0.1(markdown-it@15.0.1)
       npm-run-all2:
         specifier: 9.0.3
         version: 9.0.3
@@ -1764,8 +1764,8 @@ packages:
     peerDependencies:
       markdown-it: '>= 9.0.0'
 
-  markdown-it@15.0.0:
-    resolution: {integrity: sha512-Lf8ajvVNdRpzSNB4VegxNy7gjs8gU35l4b4+ET49LrQC5PKYwLZ72u60LeJ9gv3qiaesuYjJWCyVeQmv/QWKQw==}
+  markdown-it@15.0.1:
+    resolution: {integrity: sha512-9/7gE95FNPkfUWrjJIoHZza2iLmuJlPD0UNMxPi7bxUrbCR525YZY0r+zyfes0dZI5ZZ/uNIXUJca0pJvtw41g==}
     hasBin: true
 
   marked-terminal@7.3.0:
@@ -4194,11 +4194,11 @@ snapshots:
       type-fest: 4.41.0
       web-worker: 1.5.0
 
-  markdown-it-attrs@5.0.1(markdown-it@15.0.0):
+  markdown-it-attrs@5.0.1(markdown-it@15.0.1):
     dependencies:
-      markdown-it: 15.0.0
+      markdown-it: 15.0.1
 
-  markdown-it@15.0.0:
+  markdown-it@15.0.1:
     dependencies:
       argparse: 3.0.0
       entities: 8.0.0
