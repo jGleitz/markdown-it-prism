@@ -61,11 +61,11 @@ importers:
         specifier: 30.4.2
         version: 30.4.2(@types/node@24.13.3)(supports-color@8.1.1)
       markdown-it:
-        specifier: 14.3.0
-        version: 14.3.0
+        specifier: 14.3.1
+        version: 14.3.1
       markdown-it-attrs:
         specifier: 5.0.1
-        version: 5.0.1(markdown-it@14.3.0)
+        version: 5.0.1(markdown-it@14.3.1)
       npm-run-all2:
         specifier: 9.0.3
         version: 9.0.3
@@ -2459,8 +2459,8 @@ packages:
     peerDependencies:
       markdown-it: '>= 9.0.0'
 
-  markdown-it@14.3.0:
-    resolution: {integrity: sha512-RCEsPjR+sr0x+AuYp601tKTkgFG4YEPLCzHST3cQ/fhlJkqAkz1L2/Qbp1j9qw5SBwQHFBoW8+hoN5xssOF0Tw==}
+  markdown-it@14.3.1:
+    resolution: {integrity: sha512-4Ej49aYTDFIQ+uBkfX8GBvJGccoARxxPep+7aWTs55ozbjQJpW9M26Fe53vnGgvLeVzva/amzjQQaQu9w0vMhA==}
     hasBin: true
 
   marked-terminal@7.3.0:
@@ -6256,11 +6256,11 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  markdown-it-attrs@5.0.1(markdown-it@14.3.0):
+  markdown-it-attrs@5.0.1(markdown-it@14.3.1):
     dependencies:
-      markdown-it: 14.3.0
+      markdown-it: 14.3.1
 
-  markdown-it@14.3.0:
+  markdown-it@14.3.1:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
