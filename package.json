@@ -46,7 +46,7 @@
     "prismjs": "1.30.0"
   },
   "peerDependencies": {
-    "markdown-it": ">=7.0.1 <15.0.0",
+    "markdown-it": ">=7.0.1 <16.0.0",
     "markdown-it-attrs": ">=5.0.0"
   },
   "peerDependenciesMeta": {
@@ -71,7 +71,7 @@
     "eslint": "10.9.1",
     "eslint-plugin-yml": "3.8.1",
     "jest": "30.4.2",
-    "markdown-it": "14.3.1",
+    "markdown-it": "15.0.1",
     "markdown-it-attrs": "5.0.1",
     "npm-run-all2": "9.0.3",
     "semantic-release": "25.0.9",
