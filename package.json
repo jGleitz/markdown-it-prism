@@ -94,5 +94,5 @@
     "typescript-eslint": "8.70.0",
     "vitest": "4.1.11"
   },
-  "packageManager": "pnpm@12.3.4"
+  "packageManager": "pnpm@12.4.0"
 }
