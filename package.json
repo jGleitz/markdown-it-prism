@@ -80,7 +80,7 @@
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.1.0",
     "@stylistic/eslint-plugin": "5.10.0",
-    "@types/node": "24.13.3",
+    "@types/node": "24.13.4",
     "@typescript/native": "npm:typescript@7.0.2",
     "eslint": "10.10.0",
     "eslint-plugin-yml": "3.8.1",
