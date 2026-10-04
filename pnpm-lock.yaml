@@ -207,8 +207,8 @@ importers:
         specifier: 9.0.3
         version: 9.0.3
       publint:
-        specifier: 0.3.24
-        version: 0.3.24
+        specifier: 0.3.25
+        version: 0.3.25
       semantic-release:
         specifier: 25.0.9
         version: 25.0.9(@typescript/typescript6@6.0.2)(supports-color@8.1.1)
@@ -2329,8 +2329,8 @@ packages:
       kerberos:
         optional: true
 
-  publint@0.3.24:
-    resolution: {integrity: sha512-9zS56KrKBoqi5Qt8h92uMP8TTM9AYZSgnmCo4u2priMqkOZvQnTsziZ2p5LJ2ywbYkAjoCDp2jda9u4cgFefIw==}
+  publint@0.3.25:
+    resolution: {integrity: sha512-WMMbn/d7JqRlfXQL/JUI4n5skC8cJ5WVr8/wT5mmiYWkUdENkZr1I5rgs2+dQPVRgoJd+JRYtB46MTsuDylw9g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4702,7 +4702,7 @@ snapshots:
 
   proxy-agent-negotiate@1.1.0: {}
 
-  publint@0.3.24:
+  publint@0.3.25:
     dependencies:
       '@publint/pack': 0.1.7
       package-manager-detector: 1.8.0
