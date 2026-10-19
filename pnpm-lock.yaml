@@ -198,11 +198,11 @@ importers:
         specifier: 3.9.0
         version: 3.9.0(eslint@10.12.0(supports-color@7.2.0))
       markdown-it:
-        specifier: 15.0.2
-        version: 15.0.2
+        specifier: 15.0.3
+        version: 15.0.3
       markdown-it-attrs:
         specifier: 5.0.1
-        version: 5.0.1(markdown-it@15.0.2)
+        version: 5.0.1(markdown-it@15.0.3)
       npm-run-all2:
         specifier: 9.0.3
         version: 9.0.3
@@ -1176,8 +1176,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  argparse@3.0.0:
-    resolution: {integrity: sha512-BOp5NMrHqKxmq/OLr+clzzrRxgOKSLkcjmkWuChp7Irqwn4s74WjOBPIgWfA/HMcBnVkZ5XEuf9uUqzlpfCQ6A==}
+  argparse@3.0.3:
+    resolution: {integrity: sha512-Sn98ftV3KfsO8xfLPHG6oT8y+b0yvbrLgZjgPDXsharNY15tTAjqIsIju4S32nl6/iEUNNE4v+yL2Zhm8ooP3w==}
 
   argv-formatter@1.0.0:
     resolution: {integrity: sha512-F2+Hkm9xFaRg+GkaNnbwXNDV5O6pnCFEmqyhvfC/Ic5LbgOWjJh3L+mN/s91rxVL3znE7DYVpW0GJFT+4YBgWw==}
@@ -1398,8 +1398,8 @@ packages:
   emojilib@2.4.0:
     resolution: {integrity: sha512-5U0rVMU5Y2n2+ykNLQqMoqklN9ICBT/KsvC1Gz6vqHbz2AXXGkG+Pm5rMWk/8Vjrr/mY9985Hi8DYzn1F09Nyw==}
 
-  entities@8.0.0:
-    resolution: {integrity: sha512-zwfzJecQ/Uej6tusMqwAqU/6KL2XaB2VZ2Jg54Je6ahNBGNH6Ek6g3jjNCF0fG9EWQKGZNddNjU5F1ZQn/sBnA==}
+  entities@8.1.0:
+    resolution: {integrity: sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==}
     engines: {node: '>=20.19.0'}
 
   env-ci@11.2.0:
@@ -1945,8 +1945,8 @@ packages:
     peerDependencies:
       markdown-it: '>= 9.0.0'
 
-  markdown-it@15.0.2:
-    resolution: {integrity: sha512-q4IGxMv56jCqT4OCRCADBoDP3LO4MhmTXjFbphHPXs4g3j9Xg5RDnxqN8IF/3vIWEU+VCnUq+7JUg/cfy2E6Qw==}
+  markdown-it@15.0.3:
+    resolution: {integrity: sha512-+Az7Ojz3iRGu8KYMvJ6xVhvrxP3eE+vEtJX75Ow88XBpcQNV/0lGX5ZynIIBftREo4DC2jsveAMDaeltmm8QvQ==}
     hasBin: true
 
   marked-terminal@7.3.0:
@@ -3683,7 +3683,7 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  argparse@3.0.0: {}
+  argparse@3.0.3: {}
 
   argv-formatter@1.0.0: {}
 
@@ -3884,7 +3884,7 @@ snapshots:
 
   emojilib@2.4.0: {}
 
-  entities@8.0.0: {}
+  entities@8.1.0: {}
 
   env-ci@11.2.0:
     dependencies:
@@ -4410,14 +4410,14 @@ snapshots:
       type-fest: 4.41.0
       web-worker: 1.5.0
 
-  markdown-it-attrs@5.0.1(markdown-it@15.0.2):
+  markdown-it-attrs@5.0.1(markdown-it@15.0.3):
     dependencies:
-      markdown-it: 15.0.2
+      markdown-it: 15.0.3
 
-  markdown-it@15.0.2:
+  markdown-it@15.0.3:
     dependencies:
-      argparse: 3.0.0
-      entities: 8.0.0
+      argparse: 3.0.3
+      entities: 8.1.0
       linkify-it: 6.1.0
       mdurl: 2.1.0
       punycode.js: 2.3.1
