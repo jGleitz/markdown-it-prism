@@ -89,7 +89,7 @@
     "npm-run-all2": "9.0.4",
     "publint": "0.3.25",
     "semantic-release": "25.0.9",
-    "tsup": "8.5.1",
+    "tsup": "9.0.0",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-eslint": "8.72.1",
     "vitest": "4.1.12"
