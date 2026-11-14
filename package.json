@@ -56,10 +56,10 @@
   },
   "devDependencies": {
     "@babel/cli": "8.1.0",
-    "@babel/core": "8.1.0",
+    "@babel/core": "8.1.2",
     "@babel/preset-env": "8.0.7",
     "@babel/preset-typescript": "8.0.7",
-    "@babel/register": "8.0.6",
+    "@babel/register": "8.1.2",
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.1.1",
     "@stylistic/eslint-plugin": "5.10.0",
